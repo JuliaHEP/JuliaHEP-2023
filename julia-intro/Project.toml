@@ -1,10 +1,7 @@
-name = "JuliaHEP-2023"
-authors = ["Sam Skipsey (Samuel.Skipsey@glasgow.ac.uk)"]
-uuid = "776841e5-7853-4f56-ac65-1edceeb299cd"
-version = 0.1.0
-
 [deps]
+IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
 ImageCore = "a09fc81d-aa75-5fe9-8630-4744c3626534"
 ImageIO = "82e4d734-157c-48bb-816b-45c225c6df19"
 ImageInTerminal = "d8c32880-2388-543b-8c61-d9f865259254"
 ImageShow = "4e3cecfd-b093-5904-9786-8bbb286a6a31"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"

@@ -1,0 +1,11 @@
+name: julia-intro
+channels:
+  - conda-forge
+dependencies:
+  - python == 3.12.*
+  - jupyter-book
+  - jupyterlab
+  - jupytext
+  - pip
+  - pip:
+    - jupyterlab-rise
