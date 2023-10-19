@@ -6,6 +6,7 @@ dependencies:
   - jupyter-book
   - jupyterlab
   - jupytext
+  - nbconvert
   - pip
   - pip:
     - jupyterlab-rise
