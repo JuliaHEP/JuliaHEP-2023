@@ -1,0 +1,17 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+- caption: Introduction to Julia Lessons
+  chapters:
+  - file: julia-intro-intro
+  - file: julia-intro-functions-and-composition
+  - file: julia-intro-multiple-dispatch
+  - file: julia-intro-broadcasting
+  - file: julia-intro-julia-community
+- caption: Exercises
+  chapters:
+  - file: exercises/install
+
