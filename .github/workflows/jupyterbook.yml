@@ -18,22 +18,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Cache conda
-      uses: actions/cache@v1
-      env:
-        CACHE_NUMBER: 0
-      with:
-        path: ~/conda_pkgs_dir
-        key:
-          ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{
-          hashFiles('./julia-intro/environment.yml') }}
     # Install dependencies
     - name: Set up MiniConda
-      uses: mamba-org/setup-micromamba@v2
+      uses: mamba-org/setup-micromamba@v1
+      cache-environment: true
       with:
         environment-file: ./julia-intro/environment.yml
         init-shell: bash powershell
-        use-only-tar-bz2: true
 
     - name: Set up Julia
       uses: julia-actions/setup-julia@v1
