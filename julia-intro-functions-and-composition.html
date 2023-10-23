@@ -379,8 +379,8 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="functions-and-composition">
 <h1>Functions and Composition<a class="headerlink" href="#functions-and-composition" title="Permalink to this heading">#</a></h1>
 <p><strong>Julia</strong> wants, as far as possible, to allow you to write expressions in a manner natural to mathematicians.</p>
-<p>We’ve seen that it naturally supports both Unicode (not unusual for a programming language) and LaTeX-style shortcuts for representing mathematical symbols; however, Julia also extends its philosophy to different ways of representing operations.</p>
-<p>As with a classic imperative language, we can write a function in a rather Python-like way, specifying a name, arguments and a function body - and an optional “doc string” immediately before, which Julia will use as documentation for the function:</p>
+<p>We’ve seen that it naturally supports both Unicode (not unusual for a programming language) and LaTeX-style shortcuts for representing mathematical symbols; however, Julia also extends its philosophy to different ways of representing composition of functions.</p>
+<p>To demonstrate this, we’ll start with a classic “long-form” function, complete with doc-string:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;multiply(a,b): return the product of a and b&quot;</span>
@@ -398,38 +398,8 @@ document.write(`
 </div>
 </div>
 </div>
-<p>We can go further in Julia, eliding the “function” and simply using the direct assignment form, if the function body fits on a line:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">alsomultiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">a</span><span class="o">*</span><span class="n">b</span>
-
-<span class="n">alsomultiply</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can go even further though, just as in Python, and write a small function as an anonymous “mapping”, with the -&gt; indicating that this function takes the inputs on the left to the output on the right:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">this_is_also_multiply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="o">*</span><span class="n">b</span>
-
-<span class="n">this_is_also_multiply</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
-</pre></div>
-</div>
-</div>
-</div>
 <p>In most traditional imperative languages, you “compose” functions by simply “nesting” the function calls.
-Julia supports this:</p>
+Julia supports this, here composing two trivial anonymous functions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">twice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">x</span>
@@ -500,11 +470,11 @@ We can demonstrate this using Julia’s code introspection features:</p>
 define 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">i64</span> @julia_ComposedFunction_827<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">i64</span> @julia_ComposedFunction_823<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
 ; ┌ @ operators.jl:1031 within `#_#97`
 ; │┌ @ operators.jl:1034 within `call_composed`
-; ││┌ @ In[4]:1 within `#5`
+; ││┌ @ In[2]:1 within `#3`
 ; │││┌ @ int.jl:88 within `*`
       %1 = <span class=" -Color -Color-Bold">mul</span> <span class=" -Color -Color-Cyan">i64</span> %0, <span class=" -Color -Color-Yellow">6</span>
 ; └└└└
@@ -521,8 +491,8 @@ top:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[4]:1 within `#5`
-define <span class=" -Color -Color-Cyan">i64</span> @&quot;julia_#5_852&quot;<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[2]:1 within `#3`
+define <span class=" -Color -Color-Cyan">i64</span> @&quot;julia_#3_848&quot;<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
 ; ┌ @ int.jl:88 within `*`
    %1 = <span class=" -Color -Color-Bold">shl</span> <span class=" -Color -Color-Cyan">i64</span> %0, <span class=" -Color -Color-Yellow">1</span>
@@ -533,7 +503,7 @@ top:
 </div>
 </div>
 </div>
-<p>As should be clear, the composed form is directly optimised to “multiply by 6”, whilst the nested function call simply nests the function (&#64;code_llvm only shows us the outer function - “twice” ).</p>
+<p>As should be clear, the composed form is directly optimised to “multiply by 6”, whilst the nested function call simply nests the function (&#64;code_llvm only shows us the outer function - “twice”, which uses a “shift left” to efficiently multiply by 2 ).</p>
 </section>
 
     <script type="text/x-thebe-config">

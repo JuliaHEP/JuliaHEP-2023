@@ -758,7 +758,7 @@ This means you can, for example, define a variable that will hold any “Number�
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">my_number</span><span class="o">::</span><span class="kt">Number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">6.0</span>
 
-<span class="nd">@show</span><span class="w"> </span><span class="n">my_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="o">//</span><span class="mi">7</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">my_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="c">#as an Int!</span>
 
 <span class="nd">@show</span><span class="w"> </span><span class="n">my_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;This will fail&quot;</span><span class="w"> </span>
 </pre></div>
@@ -766,7 +766,7 @@ This means you can, for example, define a variable that will hold any “Number�
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my_number::Number = 6.0 = 6.0
-my_number = 5 // 7 = 5//7
+my_number = 5 = 5
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: Cannot `convert` an object of type String to an object of type Number
@@ -908,17 +908,21 @@ squared_integers = [i ^ 2 for i = 1:10] = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 <p>As a result, indexing is done - as in Pandas etc - with a single index expression for all axes.  Unlike Python, array indices default to starting at <em>1</em> - but you can use <em>begin</em> and <em>end</em> to represent the first and last elements in any range.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">identity_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">]</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">rotation_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">]</span>
 
 <span class="s">&quot;&quot;&quot;The top-left element of identity_matrix is </span><span class="si">$</span><span class="p">(</span><span class="n">identity_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="s"> or </span><span class="si">$</span><span class="p">(</span><span class="n">identity_matrix</span><span class="p">[</span><span class="k">begin</span><span class="p">,</span><span class="k">begin</span><span class="p">])</span><span class="s">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>identity_matrix = [[1, 0] [0, 1]] = [1 0; 0 1]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rotation_matrix = [[1, 0] [0, -1]] = [1 0; 0 -1]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;The top-left element of identity_matrix is 1 or 1&quot;
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: `identity_matrix` not defined
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">26</span><span class="p">]:</span><span class="mi">3</span>
 </pre></div>
 </div>
 </div>
@@ -971,12 +975,17 @@ farmyard_sounds[&quot;🐱&quot;] = &quot;Meow&quot; = &quot;Meow&quot;
 <span class="w">    </span><span class="n">y</span><span class="o">::</span><span class="kt">Float64</span>
 <span class="k">end</span>
 
-<span class="n">υϵκτωρ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_vector</span><span class="p">(</span><span class="mf">3.7</span><span class="p">,</span><span class="w"> </span><span class="mf">6e7</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">υϵκτωρ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_vector</span><span class="p">(</span><span class="mf">3.7</span><span class="p">,</span><span class="w"> </span><span class="mf">6e7</span><span class="p">)</span>
+
+<span class="n">υϵκτωρ</span><span class="o">.</span><span class="n">y</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my_vector(3.7, 6.0e7)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>υϵκτωρ = my_vector(3.7, 6.0e7) = my_vector(3.7, 6.0e7)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.0e7
 </pre></div>
 </div>
 </div>
