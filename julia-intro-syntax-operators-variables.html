@@ -678,7 +678,7 @@ are supported on all primitive integer types:</p>
 </div>
 </div>
 </div>
-<p>Julia will generally handle mixed type arthemetic smoothly and safely (this is done by <em>promoting</em> variables):</p>
+<p>Julia will generally handle mixed type arithmetic smoothly and safely (this is done by <em>promoting</em> variables):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span>
@@ -691,15 +691,27 @@ are supported on all primitive integer types:</p>
 </div>
 </div>
 </div>
-<p>But it will throw an error if this can’t be done safely:</p>
+<p>But it will generally throw an error if this can’t be done safely:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="kt">UInt</span><span class="p">(</span><span class="n">i</span><span class="o">^</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="kt">Int16</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0x017f5046bf5a7100
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">InexactError</span>: trunc(Int16, 12335124)
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">throw_inexacterror</span><span class="p">(</span><span class="n">f</span><span class="p">::</span><span class="n">Symbol</span><span class="p">,</span> <span class="c1">#unused#::Type{Int16}, val::UInt64)</span>
+   <span class="o">@</span> <span class="n">Core</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">634</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">checked_trunc_sint</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">656</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">toInt16</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">687</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">Int16</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">UInt64</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Core</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">782</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -727,9 +739,9 @@ are supported on all primitive integer types:</p>
 </div>
 </div>
 </div>
-<p>Note that Julia will only perform “free” conversions of type, as above, if it can do so without losing precision.
+<p>As we noted above, Julia will only perform “free” conversions of type if it can do so without losing precision.
 If we try to put a non-integer into this variable:</p>
-<div class="cell docutils container">
+<div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">integer_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.5</span>
 </pre></div>
@@ -754,11 +766,11 @@ If we try to put a non-integer into this variable:</p>
 <p>Only the “leaves” of the type tree can be values (“concrete types”) - but variables (and functions) can be defined in terms of any of the types, even the “abstract” ones.
 This means you can, for example, define a variable that will hold any “Number” type - allowing it to hold Float, Rational or Integer values, but not, say, Strings.</p>
 <p>We’ll come back to other aspects of this when we cover <em>multiple dispatch</em>.</p>
-<div class="cell docutils container">
+<div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">my_number</span><span class="o">::</span><span class="kt">Number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">6.0</span>
 
-<span class="nd">@show</span><span class="w"> </span><span class="n">my_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="c">#as an Int!</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">my_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="o">//</span><span class="mi">7</span>
 
 <span class="nd">@show</span><span class="w"> </span><span class="n">my_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;This will fail&quot;</span><span class="w"> </span>
 </pre></div>
@@ -766,7 +778,7 @@ This means you can, for example, define a variable that will hold any “Number�
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my_number::Number = 6.0 = 6.0
-my_number = 5 = 5
+my_number = 5 // 7 = 5//7
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: Cannot `convert` an object of type String to an object of type Number
@@ -824,7 +836,10 @@ my_number = 5 = 5
 </section>
 <section id="strings">
 <h3>Strings<a class="headerlink" href="#strings" title="Permalink to this heading">#</a></h3>
-<p>Strings in Julia are defined with double quotes: “oh yes, they are”, or triple double quotes, which allow use of unescaped double quotes: “””Sam exclaimed, “this is much easier than using backslashes!” “””.</p>
+<p>Strings in Julia are defined with double quotes:</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;oh</span> <span class="pre">yes,</span> <span class="pre">they</span> <span class="pre">are&quot;</span></code></p>
+<p>or triple double quotes, which allow use of unescaped double quotes:</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;&quot;Sam</span> <span class="pre">exclaimed,</span> <span class="pre">&quot;this</span> <span class="pre">is</span> <span class="pre">much</span> <span class="pre">easier</span> <span class="pre">than</span> <span class="pre">using</span> <span class="pre">backslashes!&quot;</span> <span class="pre">&quot;&quot;&quot;</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;here is a string&quot;</span>
@@ -908,21 +923,17 @@ squared_integers = [i ^ 2 for i = 1:10] = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 <p>As a result, indexing is done - as in Pandas etc - with a single index expression for all axes.  Unlike Python, array indices default to starting at <em>1</em> - but you can use <em>begin</em> and <em>end</em> to represent the first and last elements in any range.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">rotation_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">]</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">identity_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">]</span>
 
 <span class="s">&quot;&quot;&quot;The top-left element of identity_matrix is </span><span class="si">$</span><span class="p">(</span><span class="n">identity_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="s"> or </span><span class="si">$</span><span class="p">(</span><span class="n">identity_matrix</span><span class="p">[</span><span class="k">begin</span><span class="p">,</span><span class="k">begin</span><span class="p">])</span><span class="s">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rotation_matrix = [[1, 0] [0, -1]] = [1 0; 0 -1]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>identity_matrix = [[1, 0] [0, 1]] = [1 0; 0 1]
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: `identity_matrix` not defined
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">26</span><span class="p">]:</span><span class="mi">3</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;The top-left element of identity_matrix is 1 or 1&quot;
 </pre></div>
 </div>
 </div>
@@ -975,17 +986,12 @@ farmyard_sounds[&quot;🐱&quot;] = &quot;Meow&quot; = &quot;Meow&quot;
 <span class="w">    </span><span class="n">y</span><span class="o">::</span><span class="kt">Float64</span>
 <span class="k">end</span>
 
-<span class="nd">@show</span><span class="w"> </span><span class="n">υϵκτωρ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_vector</span><span class="p">(</span><span class="mf">3.7</span><span class="p">,</span><span class="w"> </span><span class="mf">6e7</span><span class="p">)</span>
-
-<span class="n">υϵκτωρ</span><span class="o">.</span><span class="n">y</span>
+<span class="n">υϵκτωρ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_vector</span><span class="p">(</span><span class="mf">3.7</span><span class="p">,</span><span class="w"> </span><span class="mf">6e7</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>υϵκτωρ = my_vector(3.7, 6.0e7) = my_vector(3.7, 6.0e7)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.0e7
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my_vector(3.7, 6.0e7)
 </pre></div>
 </div>
 </div>
