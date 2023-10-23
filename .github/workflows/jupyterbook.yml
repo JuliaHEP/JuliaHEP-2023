@@ -1,0 +1,50 @@
+name: deploy-book
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+# This job installs dependencies, builds the book, and pushes it to `gh-pages`
+jobs:
+  deploy-book:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./julia-intro
+        shell: bash -l {0}
+
+    steps:
+    - uses: actions/checkout@v4
+    # Install dependencies
+    - name: Set up MiniConda
+      uses: mamba-org/setup-micromamba@v1
+      with:
+        environment-file: ./julia-intro/environment.yml
+        init-shell: bash powershell
+        cache-environment: true
+
+    - name: Set up Julia
+      uses: julia-actions/setup-julia@v1
+
+    - uses: julia-actions/julia-buildpkg@v1
+
+
+    - name: Build the book
+      run: |
+        jupyter-book build ./docs
+
+    # Push the book's HTML to github-pages
+    - name: GitHub Pages action
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./julia-intro/docs/_build/html
+      if: github.event_name != 'pull_request'
+    - name: Deploy preview
+      uses: rossjrw/pr-preview-action@v1
+      with:
+        source-dir: ./julia-intro/docs/_build/html
+      if: github.event_name == 'pull_request'
