@@ -28,8 +28,9 @@ jobs:
 
     - name: Set up Julia
       uses: julia-actions/setup-julia@v1
-      run: |
-        julia --project=../ -e "using Pkg; Pkg.instantiate()"
+
+    - uses: julia-actions/julia-buildpkg@v1
+
 
     - name: Build the book
       run: |
