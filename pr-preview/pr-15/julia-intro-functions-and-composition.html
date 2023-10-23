@@ -467,16 +467,16 @@ We can demonstrate this using Julia’s code introspection features:</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ operators.jl:1031 within `ComposedFunction`
-define 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">i64</span> @julia_ComposedFunction_823<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+define <span class=" -Color -Color-Cyan">i64</span> @julia_ComposedFunction_823<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
 ; ┌ @ operators.jl:1031 within `#_#97`
 ; │┌ @ operators.jl:1034 within `call_composed`
 ; ││┌ @ In[2]:1 within `#3`
 ; │││┌ @ int.jl:88 within `*`
-      %1 = <span class=" -Color -Color-Bold">mul</span> <span class=" -Color -Color-Cyan">i64</span> %0, <span class=" -Color -Color-Yellow">6</span>
+      %1 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>= <span class=" -Color -Color-Bold">mul</span> <span class=" -Color -Color-Cyan">i64</span> %0, <span class=" -Color -Color-Yellow">6</span>
 ; └└└└
   <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">i64</span> %1
 <span class=" -Color -Color-Yellow">}</span>
