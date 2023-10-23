@@ -7,6 +7,9 @@ parts:
 - caption: Introduction to Julia Lessons
   chapters:
   - file: julia-intro-intro
+  - file: julia-intro-installation
+  - file: julia-intro-syntax-operators-variables
+  - file: julia-intro-syntax-fn-control
   - file: julia-intro-functions-and-composition
   - file: julia-intro-multiple-dispatch
   - file: julia-intro-broadcasting
