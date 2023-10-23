@@ -54,7 +54,7 @@ jobs:
         publish_dir: ./julia-intro/docs/_build/html
       if: github.event_name != 'pull_request'
     - name: Deploy preview
-        uses: rossjrw/pr-preview-action@v1
-        with:
-          source-dir: ./julia-intro/docs/_build/html
+      uses: rossjrw/pr-preview-action@v1
+      with:
+        source-dir: ./julia-intro/docs/_build/html
       if: github.event_name == 'pull_request'
