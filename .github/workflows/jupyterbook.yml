@@ -29,9 +29,8 @@ jobs:
           hashFiles('./julia-intro/environment.yml') }}
     # Install dependencies
     - name: Set up MiniConda
-      uses: mamba-org/setup-micromamba@v1
+      uses: mamba-org/setup-micromamba@v2
       with:
-        micromamba-version: '1.3.1-0'
         environment-file: ./julia-intro/environment.yml
         init-shell: bash powershell
         use-only-tar-bz2: true
