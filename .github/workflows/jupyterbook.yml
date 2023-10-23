@@ -21,10 +21,10 @@ jobs:
     # Install dependencies
     - name: Set up MiniConda
       uses: mamba-org/setup-micromamba@v1
-      cache-environment: true
       with:
         environment-file: ./julia-intro/environment.yml
         init-shell: bash powershell
+        cache-environment: true
 
     - name: Set up Julia
       uses: julia-actions/setup-julia@v1
