@@ -173,7 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-installation.html">Installing and Running Julia</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Julia Syntax Survival (Operators and Variables)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-fn-control.html">Julia Syntax Survival (Functions and Control Flow)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="julia-intro-functions-and-composition.html">Functions and Composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-anonymous-and-do-block.html">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-broadcasting.html">Broadcasting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-julia-community.html">The Julia Community (and getting Julia)</a></li>
@@ -452,15 +452,11 @@ the statement:</p>
 <td><p>integer divide</p></td>
 <td><p>x / y, truncated to an integer, same as <code class="docutils literal notranslate"><span class="pre">div(a,y)</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>x \ y</strong></p></td>
-<td><p>inverse divide</p></td>
-<td><p>equivalent to y / x</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>x ^ y</strong></p></td>
+<tr class="row-odd"><td><p><strong>x ^ y</strong></p></td>
 <td><p>power</p></td>
 <td><p>raises x to the yth power</p></td>
 </tr>
-<tr class="row-odd"><td><p>x % y</p></td>
+<tr class="row-even"><td><p>x % y</p></td>
 <td><p>remainder</p></td>
 <td><p>same as <code class="docutils literal notranslate"><span class="pre">rem(x,y)</span></code></p></td>
 </tr>

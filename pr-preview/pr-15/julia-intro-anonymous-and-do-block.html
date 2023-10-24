@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Functions and Composition &#8212; Introduction to Julia</title>
+    <title>Anonymous Functions and Do-block &#8212; Introduction to Julia</title>
   
   
   
@@ -62,7 +62,7 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'julia-intro-functions-and-composition';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'julia-intro-anonymous-and-do-block';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Multiple Dispatch" href="julia-intro-multiple-dispatch.html" />
@@ -173,7 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-installation.html">Installing and Running Julia</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-operators-variables.html">Julia Syntax Survival (Operators and Variables)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-fn-control.html">Julia Syntax Survival (Functions and Control Flow)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Functions and Composition</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-broadcasting.html">Broadcasting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-julia-community.html">The Julia Community (and getting Julia)</a></li>
@@ -252,7 +252,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/JuliaHEP/JuliaHEP-2023/issues/new?title=Issue%20on%20page%20%2Fjulia-intro-functions-and-composition.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/JuliaHEP/JuliaHEP-2023/issues/new?title=Issue%20on%20page%20%2Fjulia-intro-anonymous-and-do-block.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -282,7 +282,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/julia-intro-functions-and-composition.ipynb" target="_blank"
+      <li><a href="_sources/julia-intro-anonymous-and-do-block.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -351,7 +351,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -362,11 +364,20 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Functions and Composition</h1>
+    <h1>Anonymous Functions and Do-block</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anonymous-function">Anonymous function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#do-block-syntax">Do-block syntax</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -376,134 +387,99 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="functions-and-composition">
-<h1>Functions and Composition<a class="headerlink" href="#functions-and-composition" title="Permalink to this heading">#</a></h1>
-<p><strong>Julia</strong> wants, as far as possible, to allow you to write expressions in a manner natural to mathematicians.</p>
-<p>We’ve seen that it naturally supports both Unicode (not unusual for a programming language) and LaTeX-style shortcuts for representing mathematical symbols; however, Julia also extends its philosophy to different ways of representing composition of functions.</p>
-<p>To demonstrate this, we’ll start with a classic “long-form” function, complete with doc-string:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="anonymous-functions-and-do-block">
+<h1>Anonymous Functions and Do-block<a class="headerlink" href="#anonymous-functions-and-do-block" title="Permalink to this heading">#</a></h1>
+<p>While you can write everything without anonymous function and do-block, they are common syntax used in Julia code base and code easier to read &amp; write for humans.</p>
+<section id="anonymous-function">
+<h2>Anonymous function<a class="headerlink" href="#anonymous-function" title="Permalink to this heading">#</a></h2>
+<p>anonymous function is useful for writing one-liners:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;multiply(a,b): return the product of a and b&quot;</span>
-<span class="k">function</span><span class="w"> </span><span class="n">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
-<span class="w">    </span><span class="n">a</span><span class="o">*</span><span class="n">b</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sort</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{Int64}:
+  0
+  1
+ -2
+</pre></div>
+</div>
+</div>
+</div>
+<p>of course, you can always define a separate function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">_my_by</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">4</span>
+<span class="n">sort</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_my_by</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{Int64}:
+  0
+  1
+ -2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="do-block-syntax">
+<h2>Do-block syntax<a class="headerlink" href="#do-block-syntax" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">do-block</span></code> syntax helps when your anonymous function is too long but doesn’t deserve its own name:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">_one_off</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="o">&gt;=</span><span class="mi">1</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="w">    </span><span class="k">elseif</span><span class="w"> </span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">NaN</span>
+<span class="w">    </span><span class="k">end</span>
 <span class="k">end</span>
 
-<span class="n">multiply</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">map</span><span class="p">(</span><span class="n">_one_off</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{Float64}:
+  -1.0
+ NaN
+   1.0
 </pre></div>
 </div>
 </div>
 </div>
-<p>In most traditional imperative languages, you “compose” functions by simply “nesting” the function calls.
-Julia supports this, here composing two trivial anonymous functions:</p>
+<p>is equivalent to writing the following <code class="docutils literal notranslate"><span class="pre">do-block</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">twice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">x</span>
-<span class="n">thrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">3</span><span class="o">*</span><span class="n">x</span>
-
-<span class="n">twice</span><span class="p">(</span><span class="n">thrice</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">map</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">x</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="o">&gt;=</span><span class="mi">1</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="w">    </span><span class="k">elseif</span><span class="w"> </span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">NaN</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{Float64}:
+  -1.0
+ NaN
+   1.0
 </pre></div>
 </div>
 </div>
 </div>
-<p>However, Julia also supports a more “mathematically natural” method of function composition - using the ∘ (\circ) operator, we can write a very natural composition operation, and then simply “call the resulting function”:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">six_times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">twice</span><span class="w"> </span><span class="o">∘</span><span class="w"> </span><span class="n">thrice</span>
-
-<span class="n">six_times</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">twice</span><span class="w"> </span><span class="o">∘</span><span class="w"> </span><span class="n">thrice</span><span class="p">)(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">twice</span><span class="w"> </span><span class="o">∘</span><span class="w"> </span><span class="n">multiply</span><span class="p">)(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
-</pre></div>
-</div>
-</div>
-</div>
-<p>(Clearly, this does not work the other way around in the latter case, as <em>multiply</em> needs two arguments…)</p>
-<p>Function composition is especially nice if you use it with broadcasting (see next…), or with functional programming operators like map().
-Because the composition operator is a fundamental component of Julia, “composed functions” will also be JITed separately to their component functions - and thus can be more efficient than simply naïvely nesting function calls.
-We can demonstrate this using Julia’s code introspection features:</p>
-<p>the macro “&#64;code_llvm” shows us the resulting code that will be compiled by the JIT for the given expression - in this case as LLVM Intermediate Representation (there are other &#64;code_* macros that show the code at other levels of processing)</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">twice</span><span class="w"> </span><span class="o">∘</span><span class="w"> </span><span class="n">thrice</span><span class="p">)(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ operators.jl:1031 within `ComposedFunction`
-define <span class=" -Color -Color-Cyan">i64</span> @julia_ComposedFunction_823<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
-top:
-; ┌ @ operators.jl:1031 within `#_#97`
-; │┌ @ operators.jl:1034 within `call_composed`
-; ││┌ @ In[2]:1 within `#3`
-; │││┌ @ int.jl:88 within `*`
-      %1 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>= <span class=" -Color -Color-Bold">mul</span> <span class=" -Color -Color-Cyan">i64</span> %0, <span class=" -Color -Color-Yellow">6</span>
-; └└└└
-  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">i64</span> %1
-<span class=" -Color -Color-Yellow">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="p">(</span><span class="w"> </span><span class="n">twice</span><span class="p">(</span><span class="n">thrice</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[2]:1 within `#3`
-define <span class=" -Color -Color-Cyan">i64</span> @&quot;julia_#3_848&quot;<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
-top:
-; ┌ @ int.jl:88 within `*`
-   %1 = <span class=" -Color -Color-Bold">shl</span> <span class=" -Color -Color-Cyan">i64</span> %0, <span class=" -Color -Color-Yellow">1</span>
-; └
-  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">i64</span> %1
-<span class=" -Color -Color-Yellow">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>As should be clear, the composed form is directly optimised to “multiply by 6”, whilst the nested function call simply nests the function (&#64;code_llvm only shows us the outer function - “twice”, which uses a “shift left” to efficiently multiply by 2 ).</p>
+<p>More throughly speaking, the <code class="docutils literal notranslate"><span class="pre">do-block</span></code> syntax makes an anonymous function using the body (between <code class="docutils literal notranslate"><span class="pre">do</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code>), and pass this function as the first argument of <code class="docutils literal notranslate"><span class="pre">map()</span></code>. Note, this works on any function (that expects first argument to be callable), not just <code class="docutils literal notranslate"><span class="pre">map()</span></code>.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -560,6 +536,21 @@ top:
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anonymous-function">Anonymous function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#do-block-syntax">Do-block syntax</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

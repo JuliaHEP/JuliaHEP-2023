@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'julia-intro-syntax-fn-control';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Functions and Composition" href="julia-intro-functions-and-composition.html" />
+    <link rel="next" title="Anonymous Functions and Do-block" href="julia-intro-anonymous-and-do-block.html" />
     <link rel="prev" title="Julia Syntax Survival (Operators and Variables)" href="julia-intro-syntax-operators-variables.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -175,7 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-installation.html">Installing and Running Julia</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-operators-variables.html">Julia Syntax Survival (Operators and Variables)</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Julia Syntax Survival (Functions and Control Flow)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="julia-intro-functions-and-composition.html">Functions and Composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-anonymous-and-do-block.html">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-broadcasting.html">Broadcasting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-julia-community.html">The Julia Community (and getting Julia)</a></li>
@@ -378,7 +378,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-documentation">Function Documentation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compact-functions">Compact Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compact-function-definition">Compact Function Definition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anonymous-functions-lambdas">Anonymous Functions (lambdas)</a></li>
 </ul>
 </li>
@@ -467,7 +467,10 @@ document.write(`
 The ? operator will display the doc strings for a function, amongst other things (? also provides help for expressions and other constructs). All of the Julia standard library functions have docstrings.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;This function adds two Numbers&quot;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">    adder(a, b)</span>
+<span class="s">    This function adds `a` and `b`</span>
+<span class="s">&quot;&quot;&quot;</span>
 <span class="k">function</span><span class="w"> </span><span class="n">adder</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
 <span class="w">    </span><span class="n">a</span><span class="o">+</span><span class="n">b</span>
 <span class="k">end</span>
@@ -490,12 +493,15 @@ The ? operator will display the doc strings for a function, amongst other things
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>search: <span class=" -Color -Color-Bold">adder</span> <span class=" -Color -Color-Bold">adde</span>nv r<span class=" -Color -Color-Bold">ad</span>2<span class=" -Color -Color-Bold">de</span>g
 </pre></div>
 </div>
-<p>This function adds two Numbers</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>adder(a, b)
+This function adds `a` and `b`
+</pre></div>
+</div>
 </div>
 </div>
 </section>
-<section id="compact-functions">
-<h3>Compact Functions<a class="headerlink" href="#compact-functions" title="Permalink to this heading">#</a></h3>
+<section id="compact-function-definition">
+<h3>Compact Function Definition<a class="headerlink" href="#compact-function-definition" title="Permalink to this heading">#</a></h3>
 <p>If we can write a function on one line then Julia allows us to not bother with <code class="docutils literal notranslate"><span class="pre">function</span> <span class="pre">...</span> <span class="pre">end</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -706,7 +712,7 @@ I am at number 4
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">enumerate</span></code> and <code class="docutils literal notranslate"><span class="pre">zip</span></code> work just like Python:</p>
+<p><code class="docutils literal notranslate"><span class="pre">enumerate</span></code> and <code class="docutils literal notranslate"><span class="pre">zip</span></code> also exist:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">string</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">enumerate</span><span class="p">([</span><span class="s">&quot;I&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;think&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;therefore&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;I&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;am&quot;</span><span class="p">])</span>
@@ -816,11 +822,11 @@ blast off!
       </div>
     </a>
     <a class="right-next"
-       href="julia-intro-functions-and-composition.html"
+       href="julia-intro-anonymous-and-do-block.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Functions and Composition</p>
+        <p class="prev-next-title">Anonymous Functions and Do-block</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -841,7 +847,7 @@ blast off!
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-documentation">Function Documentation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compact-functions">Compact Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compact-function-definition">Compact Function Definition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anonymous-functions-lambdas">Anonymous Functions (lambdas)</a></li>
 </ul>
 </li>
