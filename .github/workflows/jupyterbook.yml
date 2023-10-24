@@ -29,6 +29,7 @@ jobs:
     - name: Set up Julia
       uses: julia-actions/setup-julia@v1
 
+    - uses: julia-actions/cache@v1
     - uses: julia-actions/julia-buildpkg@v1
 
 
