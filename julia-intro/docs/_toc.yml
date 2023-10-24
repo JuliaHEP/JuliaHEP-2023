@@ -10,7 +10,7 @@ parts:
   - file: julia-intro-installation
   - file: julia-intro-syntax-operators-variables
   - file: julia-intro-syntax-fn-control
-  - file: julia-intro-functions-and-composition
+  - file: julia-intro-anonymous-and-do-block
   - file: julia-intro-multiple-dispatch
   - file: julia-intro-broadcasting
   - file: julia-intro-julia-community
