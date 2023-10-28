@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'julia-intro-broadcasting';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The Julia Community (and getting Julia)" href="julia-intro-julia-community.html" />
+    <link rel="next" title="The Julia Community" href="julia-intro-julia-community.html" />
     <link rel="prev" title="Multiple Dispatch" href="julia-intro-multiple-dispatch.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -178,7 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-anonymous-and-do-block.html">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Broadcasting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="julia-intro-julia-community.html">The Julia Community (and getting Julia)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-julia-community.html">The Julia Community</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -381,7 +381,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="broadcasting">
 <h1>Broadcasting<a class="headerlink" href="#broadcasting" title="Permalink to this heading">#</a></h1>
 <p>Like <em>NumPy</em> for Python, <strong>Julia</strong> supports “broadcasting” over array types - that is, performing an operation on the <em>elements</em> of an array, rather than on the array itself as a whole object.</p>
-<p>Almost all Julia operations support being used in “broadcasting” mode - including function calls! In all cases, you just need to prepend the operation with a “.” to use this functionality.</p>
+<p>Almost all Julia operations support being used in “broadcasting” mode - including function calls! In all cases, you just need to prepend the operation with a “.” (a period / full stop) to use this functionality.</p>
 <p>For example, given a simple array:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -400,7 +400,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>We can distribute the “add 2” operation over all its elements by simply typing (note “.+” not “+”):</p>
+<p>We can distribute the “add 2” operation over all its elements by simply typing (note <code class="docutils literal notranslate"><span class="pre">.+</span></code> not <code class="docutils literal notranslate"><span class="pre">+</span></code>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">myarray</span>
@@ -436,7 +436,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>As mentioned above, we can even distribute function calls - the “()” operator - over our list!</p>
+<p>As mentioned above, we can even distribute function calls - the <code class="docutils literal notranslate"><span class="pre">()</span></code> operator - over our list!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">?</span><span class="n">iseven</span><span class="w">  </span><span class="c">#demonstrate how the online docs work</span>
@@ -492,34 +492,6 @@ For example, making use of the Julia “ImageShow” package family to naturally
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">[ Info: </span>Precompiling ImageCore [a09fc81d-aa75-5fe9-8630-4744c3626534]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2334] signal (2): Interrupt
-in expression starting at /home/runner/.julia/packages/ImageCore/iUr6Z/src/precompile.jl:3
-_ZNK4llvm4Pass16getAnalysisUsageERNS_13AnalysisUsageE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-unknown function (ip: (nil))
-Allocations: 21134344 (Pool: 21116896; Big: 17448); GC: 30
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Failed</span> <span class="n">to</span> <span class="n">precompile</span> <span class="n">ImageCore</span> <span class="p">[</span><span class="n">a09fc81d</span><span class="o">-</span><span class="n">aa75</span><span class="o">-</span><span class="mi">5</span><span class="n">fe9</span><span class="o">-</span><span class="mi">8630</span><span class="o">-</span><span class="mi">4744</span><span class="n">c3626534</span><span class="p">]</span> <span class="n">to</span> <span class="s2">&quot;/home/runner/.julia/compiled/v1.9/ImageCore/jl_McPHLy&quot;</span><span class="o">.</span>
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">error</span><span class="p">(</span><span class="n">s</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">35</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">internal_stderr</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">internal_stdout</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">keep_loaded_modules</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2300</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">compilecache</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2167</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">_require</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">env</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1805</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">_require_prelocked</span><span class="p">(</span><span class="n">uuidkey</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">env</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1660</span>
- <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1648</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">lock</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">267</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1611</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>We can define a simple function - the Mandelbrot set membership function:</p>
@@ -563,6 +535,7 @@ Allocations: 21134344 (Pool: 21116896; Big: 17448); GC: 30
 <p>One interesting performance characteristics to know about broadcasting in Julia is that sometimes it would “<a class="reference external" href="https://julialang.org/blog/2018/05/extensible-broadcast-fusion/">fuse</a>” the functions together, thus avoid allocating intermediate arrays.</p>
 <p>In other words: <code class="docutils literal notranslate"><span class="pre">&#64;.</span> <span class="pre">f(g(h(xs)))</span></code> is not going to allocate <code class="docutils literal notranslate"><span class="pre">hs</span> <span class="pre">=</span> <span class="pre">h.(xs)</span></code> then <code class="docutils literal notranslate"><span class="pre">gs</span> <span class="pre">=</span> <span class="pre">g.(hs)</span></code> and so on, instead it only allocate once for the final product.</p>
 <p>This is possible because broadcast operation (<code class="docutils literal notranslate"><span class="pre">.</span></code>) is part of the Julia syntax and handled differently, user can also customize broadcasting behavior of their own data types.</p>
+<p>Julia’s code introspection tools - which we’re just demonstrating here so you know they exist - also demonstrate this. Here, we’re using the <code class="docutils literal notranslate"><span class="pre">&#64;code_lowered</span></code> macro to show what Julia’s interpretation of a chain of broadcasted operations is:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
@@ -585,7 +558,7 @@ Allocations: 21134344 (Pool: 21116896; Big: 17448); GC: 30
 </div>
 </div>
 </div>
-<p>The special “Base.broadcasted” representation here wraps the operations, allowing them to be optimised using a single pre-allocated temporary object, before being “materialized” into the final output.</p>
+<p>You can see that the special <code class="docutils literal notranslate"><span class="pre">Base.broadcasted</span></code> representation here wraps the relevant operations, allowing them to be optimised using a single pre-allocated temporary object, before being <code class="docutils literal notranslate"><span class="pre">materialize</span></code>d into the final output.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -632,7 +605,7 @@ Allocations: 21134344 (Pool: 21116896; Big: 17448); GC: 30
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">The Julia Community (and getting Julia)</p>
+        <p class="prev-next-title">The Julia Community</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

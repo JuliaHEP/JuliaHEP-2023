@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>The Julia Community (and getting Julia) &#8212; Introduction to Julia</title>
+    <title>The Julia Community &#8212; Introduction to Julia</title>
   
   
   
@@ -176,7 +176,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-anonymous-and-do-block.html">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-broadcasting.html">Broadcasting</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">The Julia Community (and getting Julia)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">The Julia Community</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -364,7 +364,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>The Julia Community (and getting Julia)</h1>
+    <h1>The Julia Community</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -374,12 +374,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-julia">Getting Julia</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#juliaup">Juliaup</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-julia-packages-pkg">Managing Julia Packages (Pkg)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ijulia">IJulia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-julia-packages-pkg">Managing Julia Packages (Pkg)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pkg-environment">The Pkg “environment”</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ijulia">IJulia</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help-with-julia">Getting Help with Julia</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forum-style-the-julia-discourse">“Forum Style” - the Julia Discourse</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-time-the-julia-slack-and-others">“Real Time” - the Julia Slack [and others]</a></li>
@@ -397,32 +396,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="the-julia-community-and-getting-julia">
-<h1>The Julia Community (and getting Julia)<a class="headerlink" href="#the-julia-community-and-getting-julia" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="the-julia-community">
+<h1>The Julia Community<a class="headerlink" href="#the-julia-community" title="Permalink to this heading">#</a></h1>
 <p>Especially in the modern world, a programming language is no better than the community resources it has on the internet.</p>
 <p>Whilst the <strong>Julia</strong> community is smaller than that for Python and C++, it’s certainly well supported and active - and cross-fertilisation of ideas with other “newer” language communities such as <em>Rust</em> has led to a number of exciting developments as well.</p>
-<section id="getting-julia">
-<h2>Getting Julia<a class="headerlink" href="#getting-julia" title="Permalink to this heading">#</a></h2>
-<section id="juliaup">
-<h3>Juliaup<a class="headerlink" href="#juliaup" title="Permalink to this heading">#</a></h3>
-<p>Julia, like a lot of modern languages, has a relatively fast development tempo; sometimes too fast for distro package managers to sensibly keep up with.</p>
-<p>The best way (IMO!) to manage a Julia install is with <a class="reference external" href="https://github.com/JuliaLang/juliaup">Juliaup</a> - a Julia toolkit installation manager inspired by the excellent <em>Rustup</em> for the Rust programming language.</p>
-<p>Juliaup is available from the Windows App Store if you’re developing with a Microsoft system, or via direct installation script for MacOS and Linux distributions (see the link)</p>
-<p>Once installed, you can simply type in a terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>juliaup<span class="w"> </span>list
-</pre></div>
-</div>
-<p>to show all the versions of Julia available.
-We will work with the newest version on all platforms, 1.9.3 so simply type</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>juliaup<span class="w"> </span>install<span class="w"> </span><span class="m">1</span>.9.3
-</pre></div>
-</div>
-<p>to set that up.
-(You can have multiple Julia releases installed at once, and Juliaup will let you configure which is your default at any point in time.)</p>
-</section>
 <section id="managing-julia-packages-pkg">
-<h3>Managing Julia Packages (Pkg)<a class="headerlink" href="#managing-julia-packages-pkg" title="Permalink to this heading">#</a></h3>
-<p>Julia integrates its own package manager with a module called Pkg.
+<h2>Managing Julia Packages (Pkg)<a class="headerlink" href="#managing-julia-packages-pkg" title="Permalink to this heading">#</a></h2>
+<p>Julia integrates its own package manager with a module called <code class="docutils literal notranslate"><span class="pre">Pkg</span></code>.
 From within a Julia shell, it is easy to install packages with</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
 <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;name-of-package&quot;</span><span class="p">)</span>
@@ -430,13 +410,29 @@ From within a Julia shell, it is easy to install packages with</p>
 </div>
 <p>as long as they’re known to the Julia ecosystem.
 Pkg will handle dependancies for any packages you install, and will usually precompile all of them to guarantee high performance.</p>
-<p>Pkg also exposes many other verbs - “build” (to precompile and re-setup packages), “update” (to fetch package updates), “rm” (to remove an installed package).</p>
+<p>Pkg also exposes many other verbs - <code class="docutils literal notranslate"><span class="pre">build</span></code> (to precompile and re-setup packages), <code class="docutils literal notranslate"><span class="pre">update</span></code> (to fetch package updates), <code class="docutils literal notranslate"><span class="pre">rm</span></code> (to remove an installed package).</p>
 <p>(Packages are registered in the Julia <a class="reference external" href="https://github.com/JuliaRegistries/General">General Registry</a>, and can be browsed with tools like <a class="reference external" href="https://juliapackages.com/">Julia Packages</a> )</p>
 <p>It’s probably best to think of Pkg as similar to Cargo for Rust: it doesn’t just manage packages for your general Julia installation, it also manages the environment for a Julia project.
 Any package will have a “Project.toml” file, which is managed by Pkg, which represents the dependencies and metadata for the project. You will see that this repository has such a file, showing the packages we need to import for one of the examples.</p>
+<section id="the-pkg-environment">
+<h3>The Pkg “environment”<a class="headerlink" href="#the-pkg-environment" title="Permalink to this heading">#</a></h3>
+<p>Pkg is also one of two components of Julia which have their own sub-environments within the REPL (the other being the help functionality).</p>
+<p>Pressing <code class="docutils literal notranslate"><span class="pre">]</span></code> in a Julia REPL switches to the Pkg environment, where all commands are issued to Pkg directly.
+Hence</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
+<span class="w">    </span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>is the same as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">add</span> <span class="n">foo</span>
+</pre></div>
+</div>
+<p>within the Pkg sub environment.</p>
+<p>Pressing backspace on an empty prompt exits the environment and returns to Julia proper.</p>
+</section>
 </section>
 <section id="ijulia">
-<h3>IJulia<a class="headerlink" href="#ijulia" title="Permalink to this heading">#</a></h3>
+<h2>IJulia<a class="headerlink" href="#ijulia" title="Permalink to this heading">#</a></h2>
 <p>As Julia is one of the core Jupyter languages, it is easy to set up a Jupyter environment once you have a Julia install, with the IJulia package.
 With the help of the Pkg module, we can simply type</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
@@ -450,7 +446,6 @@ With the help of the Pkg module, we can simply type</p>
 </div>
 <p>to launch your Jupyter notebook service.
 IJulia will prompt you to install and set up a local MiniConda instance for Jupyter if you want to be truly standalone, otherwise you can integrate with your existing Jupyter install.</p>
-</section>
 </section>
 <section id="getting-help-with-julia">
 <h2>Getting Help with Julia<a class="headerlink" href="#getting-help-with-julia" title="Permalink to this heading">#</a></h2>
@@ -534,12 +529,11 @@ IJulia will prompt you to install and set up a local MiniConda instance for Jupy
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-julia">Getting Julia</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#juliaup">Juliaup</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-julia-packages-pkg">Managing Julia Packages (Pkg)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ijulia">IJulia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-julia-packages-pkg">Managing Julia Packages (Pkg)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pkg-environment">The Pkg “environment”</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ijulia">IJulia</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help-with-julia">Getting Help with Julia</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forum-style-the-julia-discourse">“Forum Style” - the Julia Discourse</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-time-the-julia-slack-and-others">“Real Time” - the Julia Slack [and others]</a></li>

@@ -178,7 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-anonymous-and-do-block.html">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-broadcasting.html">Broadcasting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="julia-intro-julia-community.html">The Julia Community (and getting Julia)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-julia-community.html">The Julia Community</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -443,8 +443,8 @@ X is greater than Y
 </div>
 </div>
 <p>As you can see, Julia’s syntax is somewhere between that of Python and MATLAB in style and it’s easy to follow.</p>
-<p>One subtle thing we’re using in this example is that <em>all</em> expressions return a value - the “value” of the <em>if</em> chain is the string that is created as the only operation in that chain… and thus the “value” of the function, without an explicit <em>return</em> statement, is simply the value of the last expression that was executed before the function ended.</p>
-<p>We could write this more explicitly as:</p>
+<p>One subtle thing we’re using in this example is that <em>all</em> expressions return a value - the “value” of the <code class="docutils literal notranslate"><span class="pre">if</span></code> chain is the string that is created as the only operation in that chain… and thus the “value” of the function, without an explicit <code class="docutils literal notranslate"><span class="pre">return</span></code> statement, is simply the value of the last expression that was executed before the function ended.</p>
+<p>We could write this more explicitly, but less naturally, as:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">verbosefunc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
@@ -486,14 +486,14 @@ X is greater than Y
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reshape</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mi">99</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">α</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reshape</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mi">99</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w">  </span><span class="c">#Julia will tab-complete LaTeX markup - type \alpha and press tab to write this variable name</span>
 
-<span class="nd">@time</span><span class="w"> </span><span class="n">go_faster</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nd">@time</span><span class="w"> </span><span class="n">go_faster</span><span class="p">(</span><span class="n">α</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.121645 seconds (273.90 k allocations: 18.587 MiB, 9.55% gc time, 99.98% compilation time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.142548 seconds (273.90 k allocations: 18.587 MiB, 7.73% gc time, 99.98% compilation time)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10×10 Matrix{Float64}:
@@ -515,9 +515,9 @@ X is greater than Y
 However, as Julia caches the result, subsequent executions are much faster, using the previously compiled code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">β</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w">  </span><span class="c">#similarly, \beta and then tab</span>
 
-<span class="nd">@time</span><span class="w"> </span><span class="n">go_faster</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nd">@time</span><span class="w"> </span><span class="n">go_faster</span><span class="p">(</span><span class="n">β</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

@@ -176,7 +176,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-anonymous-and-do-block.html">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Multiple Dispatch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-broadcasting.html">Broadcasting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="julia-intro-julia-community.html">The Julia Community (and getting Julia)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-julia-community.html">The Julia Community</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
 <ul class="nav bd-sidenav">
@@ -435,7 +435,7 @@ document.write(`
 </div>
 </div>
 <p>and you notice that when we do so, Julia notes that multiply is now a “generic function with 2 methods” - those methods being “multiply a Float64 and an Int64” and “multiply two Int64s”</p>
-<p>Julia will always pick the version of our function that matches the types of its arguments - this is called <strong>Multiple Dispatch</strong> and is the basis for how Julia implements “Object orientation” without classes. Because the “method” of the function used depends on the types of <em>all</em> of its arguments, Julia does not treat methods as being “owned” by the first argument’s type - you can’t type “myobject.method()” - instead, you simply use the function “as is”:</p>
+<p>Julia will always pick the version of our function that matches the types of its arguments - this is called <strong>Multiple Dispatch</strong> and is the basis for how Julia implements Object Orientation without classes. Because the “method” of the function used depends on the types of <em>all</em> of its arguments, Julia does not treat methods as being “owned” by the first argument’s type - you can’t type “myobject.method()” - instead, you simply use the function “as is”:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">multiply</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c">#Float64, Int64</span>
@@ -487,7 +487,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Julia’s type system is hierarchical, so we can also specify the domain of a method via higher-order types (for example, that a function works only on Numbers - which Ints and Floats are both members of -  via):</p>
+<p>Julia’s type system is hierarchical, so we can also specify the domain of a method via higher-order types (for example, that a function works only on <code class="docutils literal notranslate"><span class="pre">Numbers</span></code> - which <code class="docutils literal notranslate"><span class="pre">Ints</span></code> and <code class="docutils literal notranslate"><span class="pre">Floats</span></code> are both members of -  via):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">myfunc</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">::</span><span class="kt">Number</span><span class="p">)</span>
@@ -502,7 +502,9 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
-5.76
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.76
 </pre></div>
 </div>
 </div>
@@ -528,7 +530,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>A function without any type specifiers is equivalent to one where all the type specifiers are ::Any - the “Any” type matches all types in the system.</p>
+<p>A function without any type specifiers is equivalent to one where all the type specifiers are <code class="docutils literal notranslate"><span class="pre">::Any</span></code> - the “Any” type matches all types in the system.</p>
 <p>We can also, as in C++ etc, use parameterised types to restrict relationships between the types of arguments - for example, that all arguments must be of the same type (and in this case, that type is a kind of Number):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
