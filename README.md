@@ -1,6 +1,9 @@
 # JuliaHEP-2023
 Materials for the JuliaHEP 2023 Workshop.
 
+Read the rendered Jupyter book: https://juliahep.github.io/JuliaHEP-2023/
+
+Follow the tutorial with Binder:
 [![Binder](https://binderhub.ssl-hep.org/badge_logo.svg)](https://binderhub.ssl-hep.org/v2/gh/JuliaHEP/JuliaHEP-2023/HEAD?labpath=julia-intro%2Fdocs%2Fjulia-intro-intro.ipynb)
 
 - - -
