@@ -496,55 +496,6 @@ For example, making use of the Julia “ImageShow” package family to naturally
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">[ Info: </span>Precompiling ImageCore [a09fc81d-aa75-5fe9-8630-4744c3626534]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2630] signal (2): Interrupt
-in expression starting at none:0
-_ZN4llvm12PHITransAddr19PHITranslateSubExprEPNS_5ValueEPNS_10BasicBlockES4_PKNS_13DominatorTreeE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm12PHITransAddr17PHITranslateValueEPNS_10BasicBlockES2_PKNS_13DominatorTreeEb at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm23MemoryDependenceResults27getNonLocalPointerDepFromBBEPNS_11InstructionERKNS_12PHITransAddrERKNS_14MemoryLocationEbPNS_10BasicBlockERNS_15SmallVectorImplINS_17NonLocalDepResultEEERNS_8DenseMapISA_PNS_5ValueENS_12DenseMapInfoISA_vEENS_6detail12DenseMapPairISA_SH_EEEEbb at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm23MemoryDependenceResults28getNonLocalPointerDependencyEPNS_11InstructionERNS_15SmallVectorImplINS_17NonLocalDepResultEEE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm7GVNPass19processNonLocalLoadEPNS_8LoadInstE.part.952 at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm7GVNPass11processLoadEPNS_8LoadInstE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm7GVNPass18processInstructionEPNS_11InstructionE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm7GVNPass12processBlockEPNS_10BasicBlockE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm7GVNPass7runImplERNS_8FunctionERNS_15AssumptionCacheERNS_13DominatorTreeERKNS_17TargetLibraryInfoERNS_9AAResultsEPNS_23MemoryDependenceResultsEPNS_8LoopInfoEPNS_25OptimizationRemarkEmitterEPNS_9MemorySSAE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm3gvn13GVNLegacyPass13runOnFunctionERNS_8FunctionE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm13FPPassManager13runOnFunctionERNS_8FunctionE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm13FPPassManager11runOnModuleERNS_6ModuleE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm6legacy15PassManagerImpl3runERNS_6ModuleE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-operator() at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/aotcompile.cpp:633
-jl_dump_native_impl at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/aotcompile.cpp:692
-ijl_write_compiler_output at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/precompile.c:127
-ijl_atexit_hook at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/init.c:258
-jl_repl_entrypoint at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/jlapi.c:718
-main at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/cli/loader_exe.c:59
-unknown function (ip: 0x7f71bd229d8f)
-__libc_start_main at /lib/x86_64-linux-gnu/libc.so.6 (unknown line)
-unknown function (ip: 0x4010b8)
-unknown function (ip: (nil))
-Allocations: 29683565 (Pool: 29657290; Big: 26275); GC: 42
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Failed</span> <span class="n">to</span> <span class="n">precompile</span> <span class="n">ImageCore</span> <span class="p">[</span><span class="n">a09fc81d</span><span class="o">-</span><span class="n">aa75</span><span class="o">-</span><span class="mi">5</span><span class="n">fe9</span><span class="o">-</span><span class="mi">8630</span><span class="o">-</span><span class="mi">4744</span><span class="n">c3626534</span><span class="p">]</span> <span class="n">to</span> <span class="s2">&quot;/home/runner/.julia/compiled/v1.9/ImageCore/jl_M65YMJ&quot;</span><span class="o">.</span>
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">error</span><span class="p">(</span><span class="n">s</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">35</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">internal_stderr</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">internal_stdout</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">keep_loaded_modules</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2300</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">compilecache</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2167</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">_require</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">env</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1805</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">_require_prelocked</span><span class="p">(</span><span class="n">uuidkey</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">env</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1660</span>
- <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1648</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">lock</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">267</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1611</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>We can define a simple function - the Mandelbrot set membership function:</p>
