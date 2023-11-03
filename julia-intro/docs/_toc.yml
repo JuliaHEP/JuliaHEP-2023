@@ -16,8 +16,8 @@ parts:
   - file: julia-intro-julia-community
 - caption: Additional Topics
   chapters:
-  - file: julia-intro-dataframes
+    - file: julia-intro-plots
+    - file: julia-intro-dataframes
 - caption: Exercises
   chapters:
   - file: exercises/install
-
