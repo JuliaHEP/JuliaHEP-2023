@@ -14,7 +14,7 @@ parts:
   - file: julia-intro-multiple-dispatch
   - file: julia-intro-broadcasting
   - file: julia-intro-julia-community
-- caption: DataFrames and Plots
+- caption: Additional Topics
   chapters:
   - file: julia-intro-dataframes
 - caption: Exercises
