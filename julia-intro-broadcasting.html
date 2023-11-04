@@ -182,6 +182,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Topics</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-plots.html">Plotting in Julia</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-dataframes.html">DataFrames in Julia</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
@@ -422,7 +424,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>We can also distribute on the left and the right, where we get “element-wise” addition:</p>
+<p>We can also distribute on the left and the right, where we get “element-wise” addition when arrays are both the same geometry:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">myarray</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">myarray</span>
@@ -436,6 +438,24 @@ document.write(`
   6
   8
  10
+</pre></div>
+</div>
+</div>
+</div>
+<p>And the outer product when they are a row and a column (here using <code class="docutils literal notranslate"><span class="pre">'</span></code> to form the transpose):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">myarray</span><span class="o">&#39;</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">myarray</span><span class="w"> </span><span class="c">#the &#39; operator forms the transpose of the array</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 Matrix{Int64}:
+ 2  3  4  5   6
+ 3  4  5  6   7
+ 4  5  6  7   8
+ 5  6  7  8   9
+ 6  7  8  9  10
 </pre></div>
 </div>
 </div>
@@ -494,6 +514,9 @@ For example, making use of the Julia “ImageShow” package family to naturally
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">[ Info: </span>Precompiling ImageCore [a09fc81d-aa75-5fe9-8630-4744c3626534]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2292] signal (2): Interrupt
 </pre></div>
 </div>
 </div>

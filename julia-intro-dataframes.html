@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installing and Running Julia" href="exercises/install.html" />
-    <link rel="prev" title="The Julia Community" href="julia-intro-julia-community.html" />
+    <link rel="prev" title="Plotting in Julia" href="julia-intro-plots.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,6 +182,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Topics</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-plots.html">Plotting in Julia</a></li>
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">DataFrames in Julia</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
@@ -442,116 +444,6 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">[ Info: </span>Precompiling DataFrames [a93c6f00-e57d-5684-b7b6-d8193f3e46c0]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2836] signal (2): Interrupt
-in expression starting at /home/runner/.julia/packages/DataFrames/58MUJ/src/DataFrames.jl:14
-epoll_wait at /lib/x86_64-linux-gnu/libc.so.6 (unknown line)
-uv__io_poll at /workspace/srcdir/libuv/src/unix/epoll.c:236
-uv_run at /workspace/srcdir/libuv/src/unix/core.c:400
-ijl_task_get_next at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/partr.c:390
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>poptask at ./task.jl:974
-wait at ./task.jl:983
-fatal: error thrown and no exception handler available.
-InterruptException()
-ijl_restore_system_image_data at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/staticdata.c:3448
-jl_load_sysimg_so at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/staticdata.c:507 [inlined]
-ijl_restore_system_image at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/staticdata.c:3417
-_finish_julia_init at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/init.c:817
-julia_init at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/init.c:804
-jl_repl_entrypoint at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/jlapi.c:711
-main at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/cli/loader_exe.c:59
-unknown function (ip: 0x7f49e0a29d8f)
-__libc_start_main at /lib/x86_64-linux-gnu/libc.so.6 (unknown line)
-unknown function (ip: 0x4010b8)
-#wait#621 at ./condition.jl:130
-wait at ./condition.jl:125 [inlined]
-wait at ./process.jl:661
-success at ./process.jl:523
-jfptr_success_27121.clone_1 at /opt/hostedtoolcache/julia/1.9.3/x64/lib/julia/sys.so (unknown line)
-_jl_invoke at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/gf.c:2758 [inlined]
-ijl_apply_generic at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/gf.c:2940
-compilecache at ./loading.jl:2203
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>compilecache at ./loading.jl:2167 [inlined]
-_require at ./loading.jl:1805
-_require_prelocked at ./loading.jl:1660
-macro expansion at ./loading.jl:1648 [inlined]
-macro expansion at ./lock.jl:267 [inlined]
-require at ./loading.jl:1611
-jfptr_require_45889.clone_1 at /opt/hostedtoolcache/julia/1.9.3/x64/lib/julia/sys.so (unknown line)
-_jl_invoke at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/gf.c:2758 [inlined]
-ijl_apply_generic at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/gf.c:2940
-jl_apply at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/julia.h:1880 [inlined]
-call_require at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/toplevel.c:466 [inlined]
-eval_import_path at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/toplevel.c:503
-jl_toplevel_eval_flex at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/toplevel.c:784
-jl_eval_module_expr at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/toplevel.c:203 [inlined]
-jl_toplevel_eval_flex at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/toplevel.c:715
-jl_toplevel_eval_flex at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/toplevel.c:856
-ijl_toplevel_eval_in at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/toplevel.c:971
-eval at ./boot.jl:370 [inlined]
-include_string at ./loading.jl:1903
-_jl_invoke at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/gf.c:2758 [inlined]
-ijl_apply_generic at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/gf.c:2940
-_include at ./loading.jl:1963
-include at ./Base.jl:457 [inlined]
-include_package_for_output at ./loading.jl:2049
-jfptr_include_package_for_output_38844.clone_1 at /opt/hostedtoolcache/julia/1.9.3/x64/lib/julia/sys.so (unknown line)
-_jl_invoke at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/gf.c:2758 [inlined]
-ijl_apply_generic at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/gf.c:2940
-jl_apply at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/julia.h:1880 [inlined]
-do_call at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/interpreter.c:126
-eval_value at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/interpreter.c:226
-eval_stmt_value at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/interpreter.c:177 [inlined]
-eval_body at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/interpreter.c:624
-jl_interpret_toplevel_thunk at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/interpreter.c:762
-jl_toplevel_eval_flex at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/toplevel.c:912
-jl_toplevel_eval_flex at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/toplevel.c:856
-ijl_toplevel_eval_in at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/toplevel.c:971
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval at ./boot.jl:370 [inlined]
-include_string at ./loading.jl:1903
-include_string at ./loading.jl:1913 [inlined]
-exec_options at ./client.jl:305
-_start at ./client.jl:522
-jfptr__start_40034.clone_1 at /opt/hostedtoolcache/julia/1.9.3/x64/lib/julia/sys.so (unknown line)
-_jl_invoke at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/gf.c:2758 [inlined]
-ijl_apply_generic at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/gf.c:2940
-jl_apply at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/julia.h:1880 [inlined]
-true_main at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/jlapi.c:573
-jl_repl_entrypoint at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/jlapi.c:717
-main at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/cli/loader_exe.c:59
-unknown function (ip: 0x7f57faa29d8f)
-__libc_start_main at /lib/x86_64-linux-gnu/libc.so.6 (unknown line)
-unknown function (ip: 0x4010b8)
-unknown function (ip: (nil))
-Allocations: 691595 (Pool: 691082; Big: 513); GC: 1
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Failed</span> <span class="n">to</span> <span class="n">precompile</span> <span class="n">DataFrames</span> <span class="p">[</span><span class="n">a93c6f00</span><span class="o">-</span><span class="n">e57d</span><span class="o">-</span><span class="mi">5684</span><span class="o">-</span><span class="n">b7b6</span><span class="o">-</span><span class="n">d8193f3e46c0</span><span class="p">]</span> <span class="n">to</span> <span class="s2">&quot;/home/runner/.julia/compiled/v1.9/DataFrames/jl_HMXiHE&quot;</span><span class="o">.</span>
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">error</span><span class="p">(</span><span class="n">s</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">35</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">internal_stderr</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">internal_stdout</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">keep_loaded_modules</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2300</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">compilecache</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2167</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">_require</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">env</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1805</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">_require_prelocked</span><span class="p">(</span><span class="n">uuidkey</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">env</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1660</span>
- <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1648</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">lock</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">267</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1611</span>
 </pre></div>
 </div>
 </div>
@@ -4840,12 +4732,12 @@ AAAAAAAACP0ABRvcN+YZxsAAAAAASUVORK5CYII=
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="julia-intro-julia-community.html"
+       href="julia-intro-plots.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">The Julia Community</p>
+        <p class="prev-next-title">Plotting in Julia</p>
       </div>
     </a>
     <a class="right-next"
