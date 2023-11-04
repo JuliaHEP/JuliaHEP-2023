@@ -128,3 +128,116 @@ However, the pedagogic value of showing how multiple dispatch works outweighs Ju
 
 ## C) Plotting!
 
+This final part of the exercise needs the `Plots` library.
+
+If you haven't installed this before, then firstly we'll need to go in to `Pkg` mode to set it up.
+
+### Pkg in the REPL
+
+If you're in the REPL, press `]` to go into Pkg mode, and then type
+
+```Pkg
+    add Plots
+```
+
+and wait for Pkg to fetch and precompile all the prerequisites for the Plots package for you.
+
+### Pkg in Jupyter notebooks
+
+Pkg mode doesn't work in notebooks, so instead you will need to load the Pkg library, and use its API.
+
+type
+
+```julia
+    using Pkg
+    Pkg.add("Plots")
+```
+
+and again wait for Pkg to sort out your dependencies.
+
+### Plots
+
+Now we've got `Plots` installed, we need to load it with
+
+```julia
+    using Plots
+```
+
+(there will be a brief delay at this point as Plots sets itself up)
+
+If you're in a Jupyter notebook, you will get "inline" plots after each cell. If you're in a REPL on a machine with graphical display, Plots will instead open you a separate window to display figures.
+
+#### Line plots
+
+Let's start by displaying the function that we're finding zeros for.  We'll stick to the Real line for now, so we can use a simple `line` plot, which is also the default.
+
+We know, of course, that the Real zero for our function is at $x = 2$, so lets set up an x range from 0 to 3 to get a view of it.
+
+`Plots` can take lots of arguments to set up its x and y ordinates. For us it's easier to specify a range for x, and a function for y (`Plots` will call the function on all the x values it needs to)
+
+A range in Julia looks like `start:step:end`, so...
+
+```julia
+    plot(0.0:0.01:3.0, F)
+```
+
+You should get a nice, unsurprising, plot of our function $x^3 - 8$ from 0 to 3.
+
+#### Scatter plots
+
+Now lets modify our figure to add in a trace of all the points we evaluate with our NRS function.
+
+Using the Vector version, we should call NRS with some initial value in the range 0 to 2.5 - `1.2`, say - and assign the result to a variable.
+
+```julia
+    history = NRS([1.2], F, dF)
+```
+
+Now we have a bunch of x values, but we also need the values of F(x) for each of them. 
+
+It's easy to get this by just broadcasting `F` over all our history values, remembering that broadcasted versions of any operation have a leading `.` .
+
+Since we're plotting discrete points, we need the `scatter` function... but since we're *modifying* an existing figure, we need the modifying version, `scatter!`.
+
+So, simply:
+
+```julia
+    scatter!(history, F.(history))
+```
+
+should result in a set of points being added to our existing plot, representing the various estimates we iterated through.
+
+### Going further: the complex plane
+
+This is nice so far, but we know fine well that this problem is well-defined over the entire complex plane. 
+
+In order to display a reasonable representation of a 4 dimensional space (the 2 components of our complex-valued function at each point in the complex plane), we'll stick to simply plotting the absolute value of F at any point.
+
+`contour` is a good function for this representation - it generally wants 3 values for x,y,z. 
+
+x and y can just be ranges as before (lets go from -3 to 3 in both directions to get a good view).
+
+z will need to be a function that maps (x,y) back to complex values, calls F and then calls abs on that. We'll write this as an anonymous function.
+
+```julia
+    xy_r = -3.0:0.01:3.0
+    contour(xy_r, xy_r, (x,y) -> abs(F(x+y*im)))
+```
+
+If we want to display the trace of an NRS in the complex plane, we can just forgo representing the value of F(x) and just use `scatter!` again - using `real()` and `imag()` as broadcasted functions to get the x and y components of our points.
+
+So:
+
+```julia
+    history = NRS([1+1im], F, dF)
+```
+
+to get our history... and then it's left to you to write a call to `scatter!` with the information provided to overlay our `contour` plot.
+
+### Further work
+
+At present our scatter plot makes it hard to see the ordering of the iteration. 
+
+We could provide an array to the `markercolor` property of our scatter plot, allowing each point to take a different colour.
+
+We've also only really tested this with one F and dF - try passing different candidate functions to NRS and see how different initial values converge!
