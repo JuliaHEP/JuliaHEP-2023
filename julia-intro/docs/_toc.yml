@@ -21,3 +21,4 @@ parts:
 - caption: Exercises
   chapters:
   - file: exercises/install
+  - file: exercises/juliafunctions
