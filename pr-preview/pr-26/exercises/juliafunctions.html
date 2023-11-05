@@ -1,0 +1,719 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>The (Newton)-Raphson-Simpson method &#8212; Introduction to Julia</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'exercises/juliafunctions';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Installing and Running Julia" href="install.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/juliaheplogo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/juliaheplogo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to an Introduction to Julia
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Julia</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../julia-intro-intro.html">Julia for Python (and C++) programmers</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../julia-intro-installation.html">Installing and Running Julia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../julia-intro-syntax-operators-variables.html">Julia Syntax Survival (Operators and Variables)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../julia-intro-syntax-fn-control.html">Julia Syntax Survival (Functions and Control Flow)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../julia-intro-anonymous-and-do-block.html">Anonymous Functions and Do-block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../julia-intro-broadcasting.html">Broadcasting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../julia-intro-julia-community.html">The Julia Community</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../julia-intro-plots.html">Plotting in Julia</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../julia-intro-dataframes.html">DataFrames in Julia</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing and Running Julia</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">The (Newton)-Raphson-Simpson method</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/JuliaHEP/JuliaHEP-2023" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/JuliaHEP/JuliaHEP-2023/issues/new?title=Issue%20on%20page%20%2Fexercises/juliafunctions.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/exercises/juliafunctions.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The (Newton)-Raphson-Simpson method</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-getting-started">A) Getting Started</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nrs-function-on-numbers">NRS function, on Numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-limits">Extension - Limits</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-extending-the-nrs-function-to-store-history">B) Extending the NRS function to store history</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-it-out">Testing it out</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-aside">An Aside</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-plotting">C) Plotting!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pkg-in-the-repl">Pkg in the REPL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pkg-in-jupyter-notebooks">Pkg in Jupyter notebooks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plots">Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plots">Line plots</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots">Scatter plots</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-the-complex-plane">Going further: the complex plane</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-work">Further work</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="the-newton-raphson-simpson-method">
+<h1>The (Newton)-Raphson-Simpson method<a class="headerlink" href="#the-newton-raphson-simpson-method" title="Permalink to this heading">#</a></h1>
+<p><span class="math notranslate nohighlight">\(x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\)</span></p>
+<p>Commonly known as “Newton’s method”, despite the most significant developments in its modern form being due to Joseph Raphson and Thomas Simpson (and Newton’s version being independently developed in historically and geographically disparate locations, from the Middle East to Japan), this iterative method of finding the roots of a function <code class="docutils literal notranslate"><span class="pre">f</span></code>, given its known derivative <code class="docutils literal notranslate"><span class="pre">f'</span></code> should be familiar to most of you.</p>
+<p>In this exercise, we will explore the implementation of the (Newton)-Raphson-Simpson method - henceforth “NRS” - in Julia, as a way to experience many of the features of the language.</p>
+<section id="a-getting-started">
+<h2>A) Getting Started<a class="headerlink" href="#a-getting-started" title="Permalink to this heading">#</a></h2>
+<p>If you haven’t already, launch a <code class="docutils literal notranslate"><span class="pre">julia</span></code> REPL - or a Jupyter notebook with a Julia kernel.</p>
+<p>For the first parts of this exercise, you will not need to load any additional packages, everything is just core Julia.</p>
+<p>Firstly, we’ll write a simple function to represent the delta between one estimate for the root, <span class="math notranslate nohighlight">\(x_n\)</span> and the next, <span class="math notranslate nohighlight">\(x_{n+1}\)</span>, given the function and its derivative.
+Remember, in Julia you can type most special characters by typing their <span class="math notranslate nohighlight">\(\LaTeX\)</span> representation, and then pressing tab.</p>
+<p>So, our “nrs_delta” can be defined as, typing into the REPL, and pressing enter:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">nrsδ</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="o">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">f</span><span class="o">&#39;</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where you can type <span class="math notranslate nohighlight">\(\delta\)</span> with <code class="docutils literal notranslate"><span class="pre">\delta</span></code> and then <code class="docutils literal notranslate"><span class="pre">tab</span></code>, and the prime on the f’ as <code class="docutils literal notranslate"><span class="pre">\prime</span></code> and then <code class="docutils literal notranslate"><span class="pre">tab</span></code> .</p>
+<p>We’ll also define some test <code class="docutils literal notranslate"><span class="pre">F</span></code> and <code class="docutils literal notranslate"><span class="pre">dF</span></code> functions so we can easily test our code:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">F</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">8</span>
+<span class="n">dF</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span>
+</pre></div>
+</div>
+<p>notice, also, how Julia lets us write multiplication by juxtaposing a number and a variable, if it isn’t ambiguous.</p>
+<section id="nrs-function-on-numbers">
+<h3>NRS function, on Numbers<a class="headerlink" href="#nrs-function-on-numbers" title="Permalink to this heading">#</a></h3>
+<p>The NRS algorithm itself needs to repeatedly evaluate new deltas on our estimates, and exit when the magnitude of the delta is small enough - say, 1e-6</p>
+<p>To implement this as a function, it needs to take three things: an initial <span class="math notranslate nohighlight">\(x_0\)</span> - ideally some kind of <code class="docutils literal notranslate"><span class="pre">Number</span></code> - and the function and its derivative.</p>
+<p>Remembering that we can apply a type restriction on a function’s arguments (making it a <em>method</em>), we can start this function as:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">NRS</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Number</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="o">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>once you press enter here, you should get - as in Python - a “continuation” in the terminal, as the REPL expects you to complete the function block.</p>
+<p>For clarity for anyone reading our code, we should name our constants - like our <code class="docutils literal notranslate"><span class="pre">epsilon</span></code> for stopping, so:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">ϵ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-6</span><span class="w"> </span><span class="c">#convergence criterion</span>
+<span class="w">    </span><span class="n">x_n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span>
+</pre></div>
+</div>
+<p>Now we can go write our loop - Julia doesn’t support “do-while” loops, so we’ll have to set up our delta outside the loop to a large initial value (here we type <code class="docutils literal notranslate"><span class="pre">\Delta</span></code> and <code class="docutils literal notranslate"><span class="pre">tab</span></code> to get the capital):</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">Δ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">Δ</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1e-6</span>
+<span class="w">        </span><span class="n">Δ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nrsδ</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="o">&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">x_n</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">Δ</span>
+<span class="w">    </span><span class="k">end</span>
+</pre></div>
+</div>
+<p>Finally, the value we want to return from our function should be just the final value of <code class="docutils literal notranslate"><span class="pre">x_n</span></code>, which we can do just by mentioning it by itself on a line:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">x_n</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Try the function out with a few test values - you should find that, as it’s defined for all types that are subtypes of <code class="docutils literal notranslate"><span class="pre">Number</span></code>, it works not just for floating point values, but also Complex values (which, of course, may converge to roots other than <span class="math notranslate nohighlight">\(2\)</span>).</p>
+</section>
+<section id="extension-limits">
+<h3>Extension - Limits<a class="headerlink" href="#extension-limits" title="Permalink to this heading">#</a></h3>
+<p>At present, this function is flawed - if a particular value for <span class="math notranslate nohighlight">\(x_0\)</span> doesn’t lead to a converging solution, it will iterate for ever.</p>
+<p>By adding a new variable inside our function, called <code class="docutils literal notranslate"><span class="pre">count</span></code>, try modifying the NRS function we just wrote to also stop if it loops more than 40 times.</p>
+<p>(You can either add a second condition to the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop, or use <code class="docutils literal notranslate"><span class="pre">break</span></code> inside the loop to break out).</p>
+</section>
+</section>
+<section id="b-extending-the-nrs-function-to-store-history">
+<h2>B) Extending the NRS function to store history<a class="headerlink" href="#b-extending-the-nrs-function-to-store-history" title="Permalink to this heading">#</a></h2>
+<p>Currently, our NRS algorithm is perfectly fine, but it might be nice to have an alternative version which takes a Vector (a 1-d Array) with an initial element representing <span class="math notranslate nohighlight">\(x_0\)</span>, and appends the history of all <span class="math notranslate nohighlight">\(x_n\)</span> to it.</p>
+<p>That way, we have a record of the path the function has taken to converge to the root it finds.</p>
+<p>We’ll define a new method for the NRS function that does this - multiple dispatch will select the right version for us based on the type of the first argument.</p>
+<p>We’ll need to make only a few changes relative to the first method for NRS:</p>
+<p><strong>Firstly</strong> - this method’s first argument is a Vector of values of type T, where T must be some kind of Number.</p>
+<p>We can express this using the “where” clause in our function definition like so</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">NRS</span><span class="p">(</span><span class="n">xs</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">},</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="o">&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Number</span>
+</pre></div>
+</div>
+<p><strong>Secondly</strong>, rather than <code class="docutils literal notranslate"><span class="pre">x_n</span></code> being assigned to from <code class="docutils literal notranslate"><span class="pre">xs</span></code> directly, it needs to take the first element of <code class="docutils literal notranslate"><span class="pre">xs</span></code>.</p>
+<p>Remembering that Julia arrays index from 1, we can either use <code class="docutils literal notranslate"><span class="pre">xs[1]</span></code> or <code class="docutils literal notranslate"><span class="pre">xs[begin]</span></code> to get that value.</p>
+<p><strong>Thirdly</strong>, we need to add each new value of <code class="docutils literal notranslate"><span class="pre">x_n</span></code> to the <code class="docutils literal notranslate"><span class="pre">xs</span></code> vector.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">push!</span></code> method takes a Vector as its first argument, and a value as its second, and modifies the Vector in-place to append the value.</p>
+<p>We can add a suitable call to <code class="docutils literal notranslate"><span class="pre">push!</span></code> inside the loop, immediately after <code class="docutils literal notranslate"><span class="pre">x_n</span></code> is updated.</p>
+<p><strong>Finally</strong>, we need to return <code class="docutils literal notranslate"><span class="pre">xs</span></code> and not <code class="docutils literal notranslate"><span class="pre">x_n</span></code> at the end of the function.</p>
+<section id="testing-it-out">
+<h3>Testing it out<a class="headerlink" href="#testing-it-out" title="Permalink to this heading">#</a></h3>
+<p>Make a version of NRS with the above changes.</p>
+<p>Test it out: try passing the value <code class="docutils literal notranslate"><span class="pre">5.0</span></code> to NRS, and check it still just returns a single value. Then try passing <code class="docutils literal notranslate"><span class="pre">[5.0]</span></code> and see what you get as a result!</p>
+</section>
+<section id="an-aside">
+<h3>An Aside<a class="headerlink" href="#an-aside" title="Permalink to this heading">#</a></h3>
+<p><em>Technically</em>, this method will actually modify the Vector we pass to it, as Julia implements <em>pass by sharing</em>.</p>
+<p>The convention in Julia is that functions that modify their arguments - or other state - should have a <code class="docutils literal notranslate"><span class="pre">!</span></code> at the end of their name. So, this should really be a new function called <code class="docutils literal notranslate"><span class="pre">NRS!</span></code>.</p>
+<p>However, the pedagogic value of showing how multiple dispatch works outweighs Julia’s conventions in this one case…</p>
+</section>
+</section>
+<section id="c-plotting">
+<h2>C) Plotting!<a class="headerlink" href="#c-plotting" title="Permalink to this heading">#</a></h2>
+<p>This final part of the exercise needs the <code class="docutils literal notranslate"><span class="pre">Plots</span></code> library.</p>
+<p>If you haven’t installed this before, then firstly we’ll need to go in to <code class="docutils literal notranslate"><span class="pre">Pkg</span></code> mode to set it up.</p>
+<section id="pkg-in-the-repl">
+<h3>Pkg in the REPL<a class="headerlink" href="#pkg-in-the-repl" title="Permalink to this heading">#</a></h3>
+<p>If you’re in the REPL, press <code class="docutils literal notranslate"><span class="pre">]</span></code> to go into Pkg mode, and then type</p>
+<div class="highlight-Pkg notranslate"><div class="highlight"><pre><span></span>    add Plots
+</pre></div>
+</div>
+<p>and wait for Pkg to fetch and precompile all the prerequisites for the Plots package for you.</p>
+</section>
+<section id="pkg-in-jupyter-notebooks">
+<h3>Pkg in Jupyter notebooks<a class="headerlink" href="#pkg-in-jupyter-notebooks" title="Permalink to this heading">#</a></h3>
+<p>Pkg mode doesn’t work in notebooks, so instead you will need to load the Pkg library, and use its API.</p>
+<p>type</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
+<span class="w">    </span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Plots&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and again wait for Pkg to sort out your dependencies.</p>
+</section>
+<section id="plots">
+<h3>Plots<a class="headerlink" href="#plots" title="Permalink to this heading">#</a></h3>
+<p>Now we’ve got <code class="docutils literal notranslate"><span class="pre">Plots</span></code> installed, we need to load it with</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
+</pre></div>
+</div>
+<p>(there will be a brief delay at this point as Plots sets itself up)</p>
+<p>If you’re in a Jupyter notebook, you will get “inline” plots after each cell. If you’re in a REPL on a machine with graphical display, Plots will instead open you a separate window to display figures.</p>
+<section id="line-plots">
+<h4>Line plots<a class="headerlink" href="#line-plots" title="Permalink to this heading">#</a></h4>
+<p>Let’s start by displaying the function that we’re finding zeros for.  We’ll stick to the Real line for now, so we can use a simple <code class="docutils literal notranslate"><span class="pre">line</span></code> plot, which is also the default.</p>
+<p>We know, of course, that the Real zero for our function is at <span class="math notranslate nohighlight">\(x = 2\)</span>, so lets set up an x range from 0 to 3 to get a view of it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Plots</span></code> can take lots of arguments to set up its x and y ordinates. For us it’s easier to specify a range for x, and a function for y (<code class="docutils literal notranslate"><span class="pre">Plots</span></code> will call the function on all the x values it needs to)</p>
+<p>A range in Julia looks like <code class="docutils literal notranslate"><span class="pre">start:step:end</span></code>, so…</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">plot</span><span class="p">(</span><span class="mf">0.0</span><span class="o">:</span><span class="mf">0.01</span><span class="o">:</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You should get a nice, unsurprising, plot of our function <span class="math notranslate nohighlight">\(x^3 - 8\)</span> from 0 to 3.</p>
+</section>
+<section id="scatter-plots">
+<h4>Scatter plots<a class="headerlink" href="#scatter-plots" title="Permalink to this heading">#</a></h4>
+<p>Now lets modify our figure to add in a trace of all the points we evaluate with our NRS function.</p>
+<p>Using the Vector version, we should call NRS with some initial value in the range 0 to 2.5 - <code class="docutils literal notranslate"><span class="pre">1.2</span></code>, say - and assign the result to a variable.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">history</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NRS</span><span class="p">([</span><span class="mf">1.2</span><span class="p">],</span><span class="w"> </span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">dF</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we have a bunch of x values, but we also need the values of F(x) for each of them.</p>
+<p>It’s easy to get this by just broadcasting <code class="docutils literal notranslate"><span class="pre">F</span></code> over all our history values, remembering that broadcasted versions of any operation have a leading <code class="docutils literal notranslate"><span class="pre">.</span></code> .</p>
+<p>Since we’re plotting discrete points, we need the <code class="docutils literal notranslate"><span class="pre">scatter</span></code> function… but since we’re <em>modifying</em> an existing figure, we need the modifying version, <code class="docutils literal notranslate"><span class="pre">scatter!</span></code>.</p>
+<p>So, simply:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">scatter!</span><span class="p">(</span><span class="n">history</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="o">.</span><span class="p">(</span><span class="n">history</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>should result in a set of points being added to our existing plot, representing the various estimates we iterated through.</p>
+</section>
+</section>
+<section id="going-further-the-complex-plane">
+<h3>Going further: the complex plane<a class="headerlink" href="#going-further-the-complex-plane" title="Permalink to this heading">#</a></h3>
+<p>This is nice so far, but we know fine well that this problem is well-defined over the entire complex plane.</p>
+<p>In order to display a reasonable representation of a 4 dimensional space (the 2 components of our complex-valued function at each point in the complex plane), we’ll stick to simply plotting the absolute value of F at any point.</p>
+<p><code class="docutils literal notranslate"><span class="pre">contour</span></code> is a good function for this representation - it generally wants 3 values for x,y,z.</p>
+<p>x and y can just be ranges as before (lets go from -3 to 3 in both directions to get a good view).</p>
+<p>z will need to be a function that maps (x,y) back to complex values, calls F and then calls abs on that. We’ll write this as an anonymous function.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">xy_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="o">:</span><span class="mf">0.01</span><span class="o">:</span><span class="mf">3.0</span>
+<span class="w">    </span><span class="n">contour</span><span class="p">(</span><span class="n">xy_r</span><span class="p">,</span><span class="w"> </span><span class="n">xy_r</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="nb">im</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>If we want to display the trace of an NRS in the complex plane, we can just forgo representing the value of F(x) and just use <code class="docutils literal notranslate"><span class="pre">scatter!</span></code> again - using <code class="docutils literal notranslate"><span class="pre">real()</span></code> and <code class="docutils literal notranslate"><span class="pre">imag()</span></code> as broadcasted functions to get the x and y components of our points.</p>
+<p>So:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">history</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NRS</span><span class="p">([</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="nb">im</span><span class="p">],</span><span class="w"> </span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">dF</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to get our history… and then it’s left to you to write a call to <code class="docutils literal notranslate"><span class="pre">scatter!</span></code> with the information provided to overlay our <code class="docutils literal notranslate"><span class="pre">contour</span></code> plot.</p>
+</section>
+<section id="further-work">
+<h3>Further work<a class="headerlink" href="#further-work" title="Permalink to this heading">#</a></h3>
+<p>At present our scatter plot makes it hard to see the ordering of the iteration.</p>
+<p>We could provide an array to the <code class="docutils literal notranslate"><span class="pre">markercolor</span></code> property of our scatter plot, allowing each point to take a different colour.</p>
+<p>We’ve also only really tested this with one F and dF - try passing different candidate functions to NRS and see how different initial values converge!</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="install.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Installing and Running Julia</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-getting-started">A) Getting Started</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nrs-function-on-numbers">NRS function, on Numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-limits">Extension - Limits</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-extending-the-nrs-function-to-store-history">B) Extending the NRS function to store history</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-it-out">Testing it out</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-aside">An Aside</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-plotting">C) Plotting!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pkg-in-the-repl">Pkg in the REPL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pkg-in-jupyter-notebooks">Pkg in Jupyter notebooks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plots">Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plots">Line plots</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots">Scatter plots</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-the-complex-plane">Going further: the complex plane</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-work">Further work</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Graeme A Stewart, Samuel Skipsey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright CERN, The Contributors 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
