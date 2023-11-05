@@ -384,7 +384,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-and-clean-up-a-dataframe">Load and Clean-up a DataFrame</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-primary-variables-for-signal-and-background">Plot Primary Variables for Signal and Background</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-primary-variables-for-signal-and-background">Plot Primary Variables for Signal and Background</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-values">Summary Values</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derive-data-and-plot">Derive Data and Plot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
 </ul>
@@ -412,6 +415,10 @@ document.write(`
 <p>For the signal and background events (<code class="docutils literal notranslate"><span class="pre">Label</span> <span class="pre">==</span> <span class="pre">'s'</span></code>, <code class="docutils literal notranslate"><span class="pre">Label</span> <span class="pre">==</span> <span class="pre">'b'</span></code> respectively), plot the tau and lepton <span class="math notranslate nohighlight">\(p_T\)</span> and <span class="math notranslate nohighlight">\((\eta, \phi)\)</span>.</p>
 <p>This is a nice way to start to visualise if this is a significant variable for distinguishing signal from background.</p>
 <p>If scatter plots are too busy, you could subsample the data using the usual Julia slice notation, <code class="docutils literal notranslate"><span class="pre">[start:step:end]</span></code>.</p>
+<section id="summary-values">
+<h3>Summary Values<a class="headerlink" href="#summary-values" title="Permalink to this heading">#</a></h3>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">Statistics</span></code> package, find the mean and standard deviation for the tau and lepton <span class="math notranslate nohighlight">\(p_T\)</span> (try to use the original data frame and <code class="docutils literal notranslate"><span class="pre">groupby</span></code>).</p>
+</section>
 </section>
 <section id="derive-data-and-plot">
 <h2>Derive Data and Plot<a class="headerlink" href="#derive-data-and-plot" title="Permalink to this heading">#</a></h2>
@@ -483,7 +490,10 @@ the Higgs events from the background. After all, that is exactly the <em>raison 
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-and-clean-up-a-dataframe">Load and Clean-up a DataFrame</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-primary-variables-for-signal-and-background">Plot Primary Variables for Signal and Background</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-primary-variables-for-signal-and-background">Plot Primary Variables for Signal and Background</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-values">Summary Values</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derive-data-and-plot">Derive Data and Plot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
 </ul>

@@ -18,6 +18,10 @@ This is a nice way to start to visualise if this is a significant variable for d
 
 If scatter plots are too busy, you could subsample the data using the usual Julia slice notation, `[start:step:end]`.
 
+### Summary Values
+
+Using the `Statistics` package, find the mean and standard deviation for the tau and lepton $p_T$ (try to use the original data frame and `groupby`).
+
 ## Derive Data and Plot
 
 Calculate the distance metric between the tau and the lepton, 

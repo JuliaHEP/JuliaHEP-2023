@@ -456,13 +456,13 @@ the statement:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>x ÷ y</strong></p></td>
-<td><p>integer divide</p></td>
-<td><p>x / y, truncated to an integer, same as <code class="docutils literal notranslate"><span class="pre">div(a,y)</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>x ^ y</strong></p></td>
+<tr class="row-even"><td><p>x ^ y</p></td>
 <td><p>power</p></td>
 <td><p>raises x to the yth power</p></td>
+</tr>
+<tr class="row-odd"><td><p>x ÷ y</p></td>
+<td><p>integer divide</p></td>
+<td><p>x / y, truncated to an integer, same as <code class="docutils literal notranslate"><span class="pre">div(a,y)</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>x % y</p></td>
 <td><p>remainder</p></td>
@@ -592,6 +592,27 @@ are supported on all primitive integer types:</p>
 </div>
 </div>
 </div>
+<p>Julia also has a <code class="docutils literal notranslate"><span class="pre">===</span></code> comparison operator that is <code class="docutils literal notranslate"><span class="pre">true</span></code> when two objects are the same (not just the same value(s), but really the same in-memory object)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="n">b</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a === b = false
+a === c = true
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
+</pre></div>
+</div>
+</div>
+</div>
 <p>Julia allows you to chain comparisons:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -680,7 +701,7 @@ are supported on all primitive integer types:</p>
  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">Int16</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">UInt64</span><span class="p">)</span>
    <span class="o">@</span> <span class="n">Core</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">782</span>
  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -725,7 +746,7 @@ If we try to put a non-integer into this variable:</p>
  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">convert</span><span class="p">(</span><span class="c1">#unused#::Type{Int64}, x::Float64)</span>
    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">number</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">7</span>
  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
