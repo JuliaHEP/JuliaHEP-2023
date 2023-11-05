@@ -4,7 +4,7 @@ You can do this exercise in a notebook or as a script (or even in the REPL!).
 
 ## Load and Clean-up a DataFrame
 
-Download the reduced Higgs ML dataset from [here](https://github.com/JuliaHEP/JuliaHEP-2023/raw/main/julia-intro/docs/assets/atlas-higgs-challenge-2014-v2-reduced.csv).
+Open the reduced Higgs ML dataset, that you will find in the `assets` area of this tutorial, if you cloned it or are running via Binder (or you can get it [here](https://github.com/JuliaHEP/JuliaHEP-2023/raw/main/julia-intro/docs/assets/atlas-higgs-challenge-2014-v2-reduced.csv)).
 
 N.B. To understand the structure of the data, have a look at the [Higgs ML Website](https://higgsml.ijclab.in2p3.fr) and the [CERN Opendata Portal](https://opendata.cern.ch/record/328).
 
