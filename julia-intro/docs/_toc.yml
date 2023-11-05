@@ -22,3 +22,5 @@ parts:
   chapters:
   - file: exercises/install
   - file: exercises/juliafunctions
+  - file: exercises/dataframes
+  
