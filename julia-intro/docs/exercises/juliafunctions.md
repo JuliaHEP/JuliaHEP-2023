@@ -42,10 +42,11 @@ To implement this as a function, it needs to take three things: an initial $x_0$
 Remembering that we can apply a type restriction on a function's arguments (making it a *method*), we can start this function as:
 
 ```julia
-function NRS(x::Number, f, f')
+function nrs(x::Number, f, f')
 ```
 
-once you press enter here, you should get - as in Python - a "continuation" in the terminal, as the REPL expects you to complete the function block.
+once you press enter here, you should get - as in Python - a "continuation" in the terminal, as the REPL expects you to complete the function block. 
+Note that we're following julia convention here and naming our function lowercase (uppercase is for constants and the like).
 
 For clarity for anyone reading our code, we should name our constants - like our `epsilon` for stopping, so:
 
@@ -54,7 +55,7 @@ For clarity for anyone reading our code, we should name our constants - like our
     x_n = x
 ```
 
-Now we can go write our loop - Julia doesn't support "do-while" loops, so we'll have to set up our delta outside the loop to a large initial value (here we type `\Delta` and `tab` to get the capital): 
+Now we can go write our loop - Julia doesn't support "do-while" loops, so we'll have to set up our delta outside the loop to a large initial value (here we type `\Delta` and `tab` to get the capital):
 
 ```julia
     Δ = 1.0 
@@ -81,6 +82,8 @@ By adding a new variable inside our function, called `count`, try modifying the 
 
 (You can either add a second condition to the `while` loop, or use `break` inside the loop to break out).
 
+If you are in the REPL, you can add new lines to a multi-line entry in the history by pressing `ESC` before pressing `enter`. (Just pressing `enter` will execute the multi-line entry instead).
+
 ## B) Extending the NRS function to store history
 
 Currently, our NRS algorithm is perfectly fine, but it might be nice to have an alternative version which takes a Vector (a 1-d Array) with an initial element representing $x_0$, and appends the history of all $x_n$ to it.
@@ -91,29 +94,17 @@ We'll define a new method for the NRS function that does this - multiple dispatc
 
 We'll need to make only a few changes relative to the first method for NRS:
 
-**Firstly** - this method's first argument is a Vector of values of type T, where T must be some kind of Number.
+**Firstly** - this method's first argument is a Vector of values of type T, where T must be some kind of Number. We can express this using the "where" clause in our function definition.
 
-We can express this using the "where" clause in our function definition like so
+**Secondly**, rather than `x_n` being assigned to from `xs` directly, it needs to take the first element of `xs`. Remember that Julia arrays index from 1 by default!
 
-```julia
-function NRS(xs::Vector{T}, f, f') where T <: Number
-```
-
-**Secondly**, rather than `x_n` being assigned to from `xs` directly, it needs to take the first element of `xs`.
-
-Remembering that Julia arrays index from 1, we can either use `xs[1]` or `xs[begin]` to get that value.
-
-**Thirdly**, we need to add each new value of `x_n` to the `xs` vector.
-
-The `push!` method takes a Vector as its first argument, and a value as its second, and modifies the Vector in-place to append the value.
-
-We can add a suitable call to `push!` inside the loop, immediately after `x_n` is updated.
+**Thirdly**, we need to add each new value of `x_n` to the `xs` vector. The `push!` method takes a Vector as its first argument, and a value as its second, and modifies the Vector in-place to append the value.
 
 **Finally**, we need to return `xs` and not `x_n` at the end of the function.
 
 ### Testing it out
 
-Make a version of NRS with the above changes. 
+* Make a version of NRS with the above changes. 
 
 Test it out: try passing the value `5.0` to NRS, and check it still just returns a single value. Then try passing `[5.0]` and see what you get as a result!
 
@@ -121,9 +112,9 @@ Test it out: try passing the value `5.0` to NRS, and check it still just returns
 
 *Technically*, this method will actually modify the Vector we pass to it, as Julia implements *pass by sharing*. 
 
-The convention in Julia is that functions that modify their arguments - or other state - should have a `!` at the end of their name. So, this should really be a new function called `NRS!`. 
+The convention in Julia is that functions that modify their arguments - or other state - should have a `!` at the end of their name. So, this should really be a new function called `nrs!`. 
 
-However, the pedagogic value of showing how multiple dispatch works outweighs Julia's conventions in this one case...
+* Make a version of `nrs` which does not modify its Vector argument - making a deep copy of it instead, and returning that.
 
 
 ## C) Plotting!
@@ -193,19 +184,9 @@ Using the Vector version, we should call NRS with some initial value in the rang
     history = NRS([1.2], F, dF)
 ```
 
-Now we have a bunch of x values, but we also need the values of F(x) for each of them. 
+Now we have a bunch of x values, but we also need the values of F(x) for each of them. We can either broadcast over the history vector, or simply pass our plotting method the function to use to generate the y values directly.
 
-It's easy to get this by just broadcasting `F` over all our history values, remembering that broadcasted versions of any operation have a leading `.` .
-
-Since we're plotting discrete points, we need the `scatter` function... but since we're *modifying* an existing figure, we need the modifying version, `scatter!`.
-
-So, simply:
-
-```julia
-    scatter!(history, F.(history))
-```
-
-should result in a set of points being added to our existing plot, representing the various estimates we iterated through.
+* using one of the mutating plot methods, add a scatter plot to the figure showing the points on the curve that we evaluate.
 
 ### Going further: the complex plane
 
@@ -217,12 +198,9 @@ In order to display a reasonable representation of a 4 dimensional space (the 2 
 
 x and y can just be ranges as before (lets go from -3 to 3 in both directions to get a good view).
 
-z will need to be a function that maps (x,y) back to complex values, calls F and then calls abs on that. We'll write this as an anonymous function.
+z will need to be a function that maps (x,y) back to complex values, calls F and then calls abs on that. We'll write this as an anonymous function, although you could also 
 
-```julia
-    xy_r = -3.0:0.01:3.0
-    contour(xy_r, xy_r, (x,y) -> abs(F(x+y*im)))
-```
+* make the appropriate contour plot of F 
 
 If we want to display the trace of an NRS in the complex plane, we can just forgo representing the value of F(x) and just use `scatter!` again - using `real()` and `imag()` as broadcasted functions to get the x and y components of our points.
 
@@ -233,6 +211,8 @@ So:
 ```
 
 to get our history... and then it's left to you to write a call to `scatter!` with the information provided to overlay our `contour` plot.
+
+* overlay an appropriate scatter plot on the contour.
 
 ### Further work
 
