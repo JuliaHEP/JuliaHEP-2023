@@ -221,3 +221,18 @@ At present our scatter plot makes it hard to see the ordering of the iteration.
 We could provide an array to the `markercolor` property of our scatter plot, allowing each point to take a different colour.
 
 We've also only really tested this with one F and dF - try passing different candidate functions to NRS and see how different initial values converge!
+
+### Advanced extension
+
+These functions currently all require the user to provide both `f` and `f'`, which means that they are prone to user error.
+
+There are many automatic differentiation packages available for Julia - such as `Zygote` - listed at [Julia Diff](https://juliadiff.org), which we could use to find `f'` directly and efficiently.
+
+Install `Zygote`.
+
+Using its `gradient` method, and the fact that (for a holomorphic function), the complex gradient at $z$ is
+
+${(\frac{d\Re(f)}{dz}\bigr\rvert_z) }^*$
+where `conj` is the complex conjugation operator in Julia
+
+make versions of `nrsδ` and `nrs` that take only the initial value and the function to find the root of (assuming it is holomorphic).
