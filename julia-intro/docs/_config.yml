@@ -38,3 +38,4 @@ html:
 sphinx:
   config:
     html_extra_path: ["assets"]
+    html_js_files: [ ['https://plausible.io/js/script.js', {'defer': 'defer', 'data-domain': 'hepsoftwarefoundation.org'}] ]
