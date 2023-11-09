@@ -1,6 +1,6 @@
 # The (Newton)-Raphson-Simpson method
 
-$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$
+$x_{n+1} = x_n - \frac{f(x_n)}{f′(x_n)}$
 
 Commonly known as "Newton's method", despite the most significant developments in its modern form being due to Joseph Raphson and Thomas Simpson (and Newton's version being independently developed in historically and geographically disparate locations, from the Middle East to Japan), this iterative method of finding the roots of a function `f`, given its known derivative `f'` should be familiar to most of you.
 
@@ -18,7 +18,7 @@ Remember, in Julia you can type most special characters by typing their $\LaTeX$
 So, our "nrs_delta" can be defined as, typing into the REPL, and pressing enter:
 
 ```julia
-nrsδ(x, f, f') = - f(x) / f'(x)
+nrsδ(x, f, f′) = - f(x) / f′(x)
 ```
 
 
@@ -42,7 +42,7 @@ To implement this as a function, it needs to take three things: an initial $x_0$
 Remembering that we can apply a type restriction on a function's arguments (making it a *method*), we can start this function as:
 
 ```julia
-function nrs(x::Number, f, f')
+function nrs(x::Number, f, f′)
 ```
 
 once you press enter here, you should get - as in Python - a "continuation" in the terminal, as the REPL expects you to complete the function block. 
@@ -59,8 +59,8 @@ Now we can go write our loop - Julia doesn't support "do-while" loops, so we'll 
 
 ```julia
     Δ = 1.0 
-    while abs(Δ) > 1e-6
-        Δ = nrsδ(x, f, f')
+    while abs(Δ) > ϵ
+        Δ = nrsδ(x, f, f′)
         x_n += Δ
     end
 ```
@@ -96,7 +96,7 @@ We'll need to make only a few changes relative to the first method for NRS:
 
 **Firstly** - this method's first argument is a Vector of values of type T, where T must be some kind of Number. We can express this using the "where" clause in our function definition.
 
-**Secondly**, rather than `x_n` being assigned to from `xs` directly, it needs to take the first element of `xs`. Remember that Julia arrays index from 1 by default!
+**Secondly**, rather than `x_n` being assigned to from `xs` directly, it needs to take the first element of `xs`. 
 
 **Thirdly**, we need to add each new value of `x_n` to the `xs` vector. Using help mode (`?`) investigate the `push!` method, which can be used to implement this.
 
@@ -181,7 +181,7 @@ Now lets modify our figure to add in a trace of all the points we evaluate with 
 Using the Vector version, we should call NRS with some initial value in the range 0 to 2.5 - `1.2`, say - and assign the result to a variable.
 
 ```julia
-    history = NRS([1.2], F, dF)
+    history = nrs([1.2], F, dF)
 ```
 
 Now we have a bunch of x values, but we also need the values of F(x) for each of them. We can either broadcast over the history vector, or simply pass our plotting method the function to use to generate the y values directly.
@@ -207,7 +207,7 @@ If we want to display the trace of an NRS in the complex plane, we can just forg
 So:
 
 ```julia
-    history = NRS([1+1im], F, dF)
+    history = nrs([1.0+1.0im], F, dF)
 ```
 
 to get our history... and then it's left to you to write a call to `scatter!` with the information provided to overlay our `contour` plot.
@@ -224,9 +224,9 @@ We've also only really tested this with one F and dF - try passing different can
 
 ### Advanced extension
 
-These functions currently all require the user to provide both `f` and `f'`, which means that they are prone to user error.
+These functions currently all require the user to provide both `f` and `f′`, which means that they are prone to user error.
 
-There are many automatic differentiation packages available for Julia - such as `Zygote` - listed at [Julia Diff](https://juliadiff.org), which we could use to find `f'` directly and efficiently.
+There are many automatic differentiation packages available for Julia - such as `Zygote` - listed at [Julia Diff](https://juliadiff.org), which we could use to find `f′` directly and efficiently.
 
 Install `Zygote`.
 
@@ -235,4 +235,4 @@ Using its `gradient` method, and the fact that (for a holomorphic function), the
 ${(\frac{d\Re(f)}{dz}\bigr\rvert_z) }^*$
 where `conj` is the complex conjugation operator in Julia
 
-make versions of `nrsδ` and `nrs` that take only the initial value and the function to find the root of (assuming it is holomorphic).
+* make versions of `nrsδ` and `nrs` that take only the initial value and the function to find the root of (assuming it is holomorphic).
