@@ -198,7 +198,7 @@ In order to display a reasonable representation of a 4 dimensional space (the 2 
 
 x and y can just be ranges as before (lets go from -3 to 3 in both directions to get a good view).
 
-z will need to be a function that maps (x,y) back to complex values, calls F and then calls abs on that. We'll write this as an anonymous function, although you could also 
+z will need to be a function that maps (x,y) back to complex values, calls F and then calls abs on that. We should write this as an anonymous function.
 
 * make the appropriate contour plot of F 
 
@@ -214,7 +214,7 @@ to get our history... and then it's left to you to write a call to `scatter!` wi
 
 * overlay an appropriate scatter plot on the contour.
 
-### Further work
+## Further work
 
 At present our scatter plot makes it hard to see the ordering of the iteration. 
 
