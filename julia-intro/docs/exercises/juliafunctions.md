@@ -98,7 +98,7 @@ We'll need to make only a few changes relative to the first method for NRS:
 
 **Secondly**, rather than `x_n` being assigned to from `xs` directly, it needs to take the first element of `xs`. Remember that Julia arrays index from 1 by default!
 
-**Thirdly**, we need to add each new value of `x_n` to the `xs` vector. The `push!` method takes a Vector as its first argument, and a value as its second, and modifies the Vector in-place to append the value.
+**Thirdly**, we need to add each new value of `x_n` to the `xs` vector. Using help mode (`?`) investigate the `push!` method, which can be used to implement this.
 
 **Finally**, we need to return `xs` and not `x_n` at the end of the function.
 
