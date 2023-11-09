@@ -54,7 +54,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
@@ -173,6 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-installation.html">Installing and Running Julia</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-operators-variables.html">Julia Syntax Survival (Operators and Variables)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-arrays.html">Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-fn-control.html">Julia Syntax Survival (Functions and Control Flow)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-anonymous-and-do-block.html">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
@@ -385,6 +386,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-julia-packages-pkg">Managing Julia Packages (Pkg)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pkg-environment">The Pkg “environment”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-modules">Loading modules</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ijulia">IJulia</a></li>
@@ -421,8 +423,10 @@ From within a Julia shell, it is easy to install packages with</p>
 Pkg will handle dependancies for any packages you install, and will usually precompile all of them to guarantee high performance.</p>
 <p>Pkg also exposes many other verbs - <code class="docutils literal notranslate"><span class="pre">build</span></code> (to precompile and re-setup packages), <code class="docutils literal notranslate"><span class="pre">update</span></code> (to fetch package updates), <code class="docutils literal notranslate"><span class="pre">rm</span></code> (to remove an installed package).</p>
 <p>(Packages are registered in the Julia <a class="reference external" href="https://github.com/JuliaRegistries/General">General Registry</a>, and can be browsed with tools like <a class="reference external" href="https://juliapackages.com/">Julia Packages</a> )</p>
-<p>It’s probably best to think of Pkg as similar to Cargo for Rust: it doesn’t just manage packages for your general Julia installation, it also manages the environment for a Julia project.
-Any package will have a “Project.toml” file, which is managed by Pkg, which represents the dependencies and metadata for the project. You will see that this repository has such a file, showing the packages we need to import for one of the examples.</p>
+<p>It’s probably best to think of Pkg as similar to Cargo for Rust: it doesn’t just manage packages for your general Julia installation, it also manages the environment for a Julia project.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">activate</span></code> verb, with a directory path, causes Pkg to consider that directory as the root of a project or package, and manage packages relative to that.
+Any package will have a “Project.toml” file which represents the dependencies and metadata for the project, which Pkg creates, as well as a “Manifest.toml” which represents the precise state of all packages installed (version and hashes), including dependencies of dependencies.</p>
+<p>You will see that this repository has such files, showing the packages we need to import for the examples.</p>
 <section id="the-pkg-environment">
 <h3>The Pkg “environment”<a class="headerlink" href="#the-pkg-environment" title="Permalink to this heading">#</a></h3>
 <p>Pkg is also one of two components of Julia which have their own sub-environments within the REPL (the other being the help functionality).</p>
@@ -438,6 +442,29 @@ Hence</p>
 </div>
 <p>within the Pkg sub environment.</p>
 <p>Pressing backspace on an empty prompt exits the environment and returns to Julia proper.</p>
+</section>
+<section id="loading-modules">
+<h3>Loading modules<a class="headerlink" href="#loading-modules" title="Permalink to this heading">#</a></h3>
+<p>Once you have modules installed locally, Julia provides a familiar way to load their symbols into the namespace.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">packagename</span>
+</pre></div>
+</div>
+<p>loads all of the symbols from packagename into the namespace, with no qualifiers. So, if <code class="docutils literal notranslate"><span class="pre">packagename</span></code> contains an exported function called <code class="docutils literal notranslate"><span class="pre">foo</span></code>, we can use it as</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">foo</span><span class="p">()</span><span class="w"> </span><span class="c">#the &quot;foo&quot; from &quot;packagename&quot;</span>
+</pre></div>
+</div>
+<p>Conversely, to load a module but keep symbols from it in their own namespace, use <code class="docutils literal notranslate"><span class="pre">import</span></code>:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">import</span><span class="w"> </span><span class="n">packagename</span>
+<span class="w">    </span><span class="n">packagename</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span><span class="w"> </span><span class="c">#&quot;foo&quot; is in its own namespace</span>
+</pre></div>
+</div>
+<p>Both functionalities support loading more than one module at once with a comma-separated list. They also allow specific symbols to be loaded from a module by naming them after a colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>), and using the <code class="docutils literal notranslate"><span class="pre">as</span></code> keyword to rename individual symbols, or the name of the module’s namespace.</p>
+<p>So:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">packagename</span><span class="o">:</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">pnfoo</span><span class="w"> </span><span class="c">#only load the symbol &quot;foo&quot; into the global namespace from &quot;packagename&quot;, and rename it to &quot;pnfoo&quot;</span>
+<span class="w">    </span><span class="k">import</span><span class="w"> </span><span class="n">packagename</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">pn</span><span class="w"> </span><span class="c">#add the symbols in &quot;packagename&quot; as the &quot;pn&quot; namespace</span>
+</pre></div>
+</div>
+<p>(If you load two packages into the namespace with conflicting symbols - say, two modules that both export “plot” - then you will need to explicitly disambiguate with the module name when referring to those symbols.)</p>
 </section>
 </section>
 <section id="ijulia">
@@ -540,6 +567,7 @@ IJulia will prompt you to install and set up a local MiniConda instance for Jupy
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-julia-packages-pkg">Managing Julia Packages (Pkg)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pkg-environment">The Pkg “environment”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-modules">Loading modules</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ijulia">IJulia</a></li>

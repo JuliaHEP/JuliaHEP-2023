@@ -54,7 +54,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
@@ -175,6 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-installation.html">Installing and Running Julia</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-operators-variables.html">Julia Syntax Survival (Operators and Variables)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-arrays.html">Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-fn-control.html">Julia Syntax Survival (Functions and Control Flow)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-anonymous-and-do-block.html">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
@@ -519,6 +520,34 @@ For example, making use of the Julia “ImageShow” package family to naturally
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">[ Info: </span>Precompiling ImageCore [a09fc81d-aa75-5fe9-8630-4744c3626534]
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2508] signal (2): Interrupt
+in expression starting at /home/runner/.julia/packages/ImageCore/wTsMr/src/ImageCore.jl:173
+_ZN4llvm30TargetTransformInfoWrapperPassD0Ev at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+unknown function (ip: (nil))
+Allocations: 43603762 (Pool: 43570153; Big: 33609); GC: 59
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Failed</span> <span class="n">to</span> <span class="n">precompile</span> <span class="n">ImageCore</span> <span class="p">[</span><span class="n">a09fc81d</span><span class="o">-</span><span class="n">aa75</span><span class="o">-</span><span class="mi">5</span><span class="n">fe9</span><span class="o">-</span><span class="mi">8630</span><span class="o">-</span><span class="mi">4744</span><span class="n">c3626534</span><span class="p">]</span> <span class="n">to</span> <span class="s2">&quot;/home/runner/.julia/compiled/v1.9/ImageCore/jl_XuHFvz&quot;</span><span class="o">.</span>
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">error</span><span class="p">(</span><span class="n">s</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">35</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">internal_stderr</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">internal_stdout</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">keep_loaded_modules</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2300</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">compilecache</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2167</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">_require</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">env</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1805</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">_require_prelocked</span><span class="p">(</span><span class="n">uuidkey</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">env</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1660</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1648</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">lock</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">267</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1611</span>
+</pre></div>
+</div>
 </div>
 </div>
 <p>We can define a simple function - the Mandelbrot set membership function:</p>
@@ -544,7 +573,7 @@ For example, making use of the Julia “ImageShow” package family to naturally
 <p>And a matrix representing a subset of the complex plane:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">argand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">*</span><span class="mi">1</span><span class="nb">im</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=-</span><span class="mi">200</span><span class="o">:</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">=-</span><span class="mi">200</span><span class="o">:</span><span class="mi">200</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">argand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">*</span><span class="mi">1</span><span class="nb">im</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">-</span><span class="mi">200</span><span class="o">:</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">-</span><span class="mi">200</span><span class="o">:</span><span class="mi">200</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">;</span>
 </pre></div>
 </div>
 </div>

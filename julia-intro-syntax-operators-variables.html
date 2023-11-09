@@ -54,7 +54,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'julia-intro-syntax-operators-variables';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Julia Syntax Survival (Functions and Control Flow)" href="julia-intro-syntax-fn-control.html" />
+    <link rel="next" title="Arrays" href="julia-intro-arrays.html" />
     <link rel="prev" title="Installing and Running Julia" href="julia-intro-installation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -173,6 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-installation.html">Installing and Running Julia</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Julia Syntax Survival (Operators and Variables)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-arrays.html">Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-fn-control.html">Julia Syntax Survival (Functions and Control Flow)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-anonymous-and-do-block.html">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
@@ -795,7 +796,7 @@ This means you can, for example, define a variable that will hold any “Number�
 <h3>Strings<a class="headerlink" href="#strings" title="Permalink to this heading">#</a></h3>
 <p>Strings in Julia are defined with double quotes:</p>
 <p><code class="docutils literal notranslate"><span class="pre">&quot;oh</span> <span class="pre">yes,</span> <span class="pre">they</span> <span class="pre">are&quot;</span></code></p>
-<p>or triple double quotes, which allow use of unescaped double quotes:</p>
+<p>or triple double quotes, which allow use of unescaped double quotes and newlines:</p>
 <p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;&quot;Sam</span> <span class="pre">exclaimed,</span> <span class="pre">&quot;this</span> <span class="pre">is</span> <span class="pre">much</span> <span class="pre">easier</span> <span class="pre">than</span> <span class="pre">using</span> <span class="pre">backslashes!&quot;</span> <span class="pre">&quot;&quot;&quot;</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -854,48 +855,8 @@ This means you can, for example, define a variable that will hold any “Number�
 </section>
 <section id="arrays-dicts-and-other-composite-types">
 <h3>Arrays, Dicts and other Composite Types<a class="headerlink" href="#arrays-dicts-and-other-composite-types" title="Permalink to this heading">#</a></h3>
-<p>Julia supports Array, Dict, Tuple and other “container types” you may recognise from Python, and the syntax is similar for 1-dimensional examples, including support for “list comprehension” expressions.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">my_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">]</span><span class="w"> </span><span class="c">#you can make &quot;Python like&quot; arrays with mixed types in them</span>
-
-<span class="nd">@show</span><span class="w"> </span><span class="n">my_integer_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">66</span><span class="p">]</span><span class="w"> </span><span class="c">#but Julia will specialise an Array literal with only 1 type in it to be uniform</span>
-
-<span class="nd">@show</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">my_integer_array</span><span class="p">)</span>
-
-<span class="nd">@show</span><span class="w"> </span><span class="n">squared_integers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">i</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">];</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my_list = [1, 2, &#39;a&#39;] = Any[1, 2, &#39;a&#39;]
-my_integer_array = [1, 2, 7, 66] = [1, 2, 7, 66]
-typeof(my_integer_array) = Vector{Int64}
-squared_integers = [i ^ 2 for i = 1:10] = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
-</pre></div>
-</div>
-</div>
-</div>
-<p>Julia also supports multi-dimensional Arrays internally as first-class types, (that is, they’re not simply “an array of arrays” or whatever), allowing for efficient representations of specialised data (like SparseArrays or diagonal matrices).</p>
-<p>As a result, indexing is done - as in Pandas etc - with a single index expression for all axes.  Unlike Python, array indices default to starting at <em>1</em> - but you can use <code class="docutils literal notranslate"><span class="pre">begin</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> to represent the first and last elements in any range.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">identity_matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">]</span>
-
-<span class="s">&quot;&quot;&quot;The top-left element of identity_matrix is </span><span class="si">$</span><span class="p">(</span><span class="n">identity_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="s"> or </span><span class="si">$</span><span class="p">(</span><span class="n">identity_matrix</span><span class="p">[</span><span class="k">begin</span><span class="p">,</span><span class="k">begin</span><span class="p">])</span><span class="s">&quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>identity_matrix = [[1, 0] [0, 1]] = [1 0; 0 1]
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;The top-left element of identity_matrix is 1 or 1&quot;
-</pre></div>
-</div>
-</div>
-</div>
-<p>As with NumPy, there are a large number of utility methods to efficiently create Arrays of a specific type and geometry.</p>
+<p>Julia supports Array, Dict, Tuple and other “container types” you may recognise from Python, and the syntax is similar for 1-dimensional examples.</p>
+<p>Arrays are rich enough that they deserve their own notebook, which we’ll come to afterward.</p>
 <section id="dictionaries">
 <h4>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this heading">#</a></h4>
 <p>We can make Dictionaries (for C++ programmers - HashMaps or AssociativeArrays) with the <code class="docutils literal notranslate"><span class="pre">Dict</span></code> constructor.
@@ -1020,11 +981,11 @@ farmyard_sounds[&quot;🐱&quot;] = &quot;Meow&quot; = &quot;Meow&quot;
       </div>
     </a>
     <a class="right-next"
-       href="julia-intro-syntax-fn-control.html"
+       href="julia-intro-arrays.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Julia Syntax Survival (Functions and Control Flow)</p>
+        <p class="prev-next-title">Arrays</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

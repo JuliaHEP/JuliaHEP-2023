@@ -54,7 +54,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
@@ -173,6 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-installation.html">Installing and Running Julia</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-operators-variables.html">Julia Syntax Survival (Operators and Variables)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-arrays.html">Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-fn-control.html">Julia Syntax Survival (Functions and Control Flow)</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
@@ -398,7 +399,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="anonymous-functions-and-do-block">
 <h1>Anonymous Functions and Do-block<a class="headerlink" href="#anonymous-functions-and-do-block" title="Permalink to this heading">#</a></h1>
-<p>While you can write everything without anonymous function and do-block, they are common syntax used in Julia code base and code easier to read &amp; write for humans.</p>
+<p>While you can write everything without anonymous functions and do-blocks, they are common syntax used in the Julia code base and make code easier to read &amp; write for humans.</p>
 <section id="anonymous-function">
 <h2>Anonymous function<a class="headerlink" href="#anonymous-function" title="Permalink to this heading">#</a></h2>
 <p>As a reminder, anonymous functions are useful for writing one-liners:</p>
@@ -417,7 +418,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>of course, you can always define a separate function:</p>
+<p>of course, you can always define a separate named function, although this pollutes the namespace if you’re only using it once:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">_my_by</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">4</span>
@@ -488,8 +489,23 @@ document.write(`
 </div>
 </div>
 </div>
-<p>More throughly speaking, the <code class="docutils literal notranslate"><span class="pre">do-block</span></code> syntax makes an anonymous function using the body (between <code class="docutils literal notranslate"><span class="pre">do</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code>), and passes this function as the first argument of <code class="docutils literal notranslate"><span class="pre">map()</span></code>. Note, this works on any function (that expects first argument to be callable), not just <code class="docutils literal notranslate"><span class="pre">map()</span></code>.</p>
+<p>More throughly speaking, the <code class="docutils literal notranslate"><span class="pre">do-block</span></code> syntax makes an anonymous function using the body (between <code class="docutils literal notranslate"><span class="pre">do</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code>), taking variable names immediately after the <code class="docutils literal notranslate"><span class="pre">do</span></code> as parameters, and passes this function as the first argument of <code class="docutils literal notranslate"><span class="pre">map()</span></code>. Note, this works on any function (that expects first argument to be callable), not just <code class="docutils literal notranslate"><span class="pre">map()</span></code>.</p>
 <p>Many functions in the Julia standard library have alternate forms which take a function as their first argument to allow this kind of style. Generally, such functions also perform clean-up after the do-block has completed, making this a lot like <code class="docutils literal notranslate"><span class="pre">with</span></code> blocks in Python.</p>
+<p>For example, there is a version of <code class="docutils literal notranslate"><span class="pre">open</span></code> which enables a <em>very</em> familiar form to Python programmers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">open</span><span class="p">(</span><span class="s">&quot;somefile.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">write</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">io</span>
+<span class="w">    </span><span class="n">write</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;I added this line!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 

@@ -54,7 +54,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
@@ -175,6 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l1"><a class="reference internal" href="../julia-intro-installation.html">Installing and Running Julia</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../julia-intro-syntax-operators-variables.html">Julia Syntax Survival (Operators and Variables)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../julia-intro-arrays.html">Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../julia-intro-syntax-fn-control.html">Julia Syntax Survival (Functions and Control Flow)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../julia-intro-anonymous-and-do-block.html">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
@@ -404,7 +405,10 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-the-complex-plane">Going further: the complex plane</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-work">Further work</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-work">Further work</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-extension">Advanced extension</a></li>
 </ul>
 </li>
 </ul>
@@ -420,7 +424,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-newton-raphson-simpson-method">
 <h1>The (Newton)-Raphson-Simpson method<a class="headerlink" href="#the-newton-raphson-simpson-method" title="Permalink to this heading">#</a></h1>
-<p><span class="math notranslate nohighlight">\(x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\)</span></p>
+<p><span class="math notranslate nohighlight">\(x_{n+1} = x_n - \frac{f(x_n)}{f′(x_n)}\)</span></p>
 <p>Commonly known as “Newton’s method”, despite the most significant developments in its modern form being due to Joseph Raphson and Thomas Simpson (and Newton’s version being independently developed in historically and geographically disparate locations, from the Middle East to Japan), this iterative method of finding the roots of a function <code class="docutils literal notranslate"><span class="pre">f</span></code>, given its known derivative <code class="docutils literal notranslate"><span class="pre">f'</span></code> should be familiar to most of you.</p>
 <p>In this exercise, we will explore the implementation of the (Newton)-Raphson-Simpson method - henceforth “NRS” - in Julia, as a way to experience many of the features of the language.</p>
 <section id="a-getting-started">
@@ -430,7 +434,7 @@ document.write(`
 <p>Firstly, we’ll write a simple function to represent the delta between one estimate for the root, <span class="math notranslate nohighlight">\(x_n\)</span> and the next, <span class="math notranslate nohighlight">\(x_{n+1}\)</span>, given the function and its derivative.
 Remember, in Julia you can type most special characters by typing their <span class="math notranslate nohighlight">\(\LaTeX\)</span> representation, and then pressing tab.</p>
 <p>So, our “nrs_delta” can be defined as, typing into the REPL, and pressing enter:</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">nrsδ</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="o">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">f</span><span class="o">&#39;</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">nrsδ</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">f′</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">f′</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where you can type <span class="math notranslate nohighlight">\(\delta\)</span> with <code class="docutils literal notranslate"><span class="pre">\delta</span></code> and then <code class="docutils literal notranslate"><span class="pre">tab</span></code>, and the prime on the f’ as <code class="docutils literal notranslate"><span class="pre">\prime</span></code> and then <code class="docutils literal notranslate"><span class="pre">tab</span></code> .</p>
@@ -445,10 +449,11 @@ Remember, in Julia you can type most special characters by typing their <span cl
 <p>The NRS algorithm itself needs to repeatedly evaluate new deltas on our estimates, and exit when the magnitude of the delta is small enough - say, 1e-6</p>
 <p>To implement this as a function, it needs to take three things: an initial <span class="math notranslate nohighlight">\(x_0\)</span> - ideally some kind of <code class="docutils literal notranslate"><span class="pre">Number</span></code> - and the function and its derivative.</p>
 <p>Remembering that we can apply a type restriction on a function’s arguments (making it a <em>method</em>), we can start this function as:</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">NRS</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Number</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="o">&#39;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">nrs</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Number</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">f′</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>once you press enter here, you should get - as in Python - a “continuation” in the terminal, as the REPL expects you to complete the function block.</p>
+<p>once you press enter here, you should get - as in Python - a “continuation” in the terminal, as the REPL expects you to complete the function block.
+Note that we’re following julia convention here and naming our function lowercase (uppercase is for constants and the like).</p>
 <p>For clarity for anyone reading our code, we should name our constants - like our <code class="docutils literal notranslate"><span class="pre">epsilon</span></code> for stopping, so:</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">ϵ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-6</span><span class="w"> </span><span class="c">#convergence criterion</span>
 <span class="w">    </span><span class="n">x_n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span>
@@ -456,8 +461,8 @@ Remember, in Julia you can type most special characters by typing their <span cl
 </div>
 <p>Now we can go write our loop - Julia doesn’t support “do-while” loops, so we’ll have to set up our delta outside the loop to a large initial value (here we type <code class="docutils literal notranslate"><span class="pre">\Delta</span></code> and <code class="docutils literal notranslate"><span class="pre">tab</span></code> to get the capital):</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">Δ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">Δ</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1e-6</span>
-<span class="w">        </span><span class="n">Δ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nrsδ</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="o">&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">Δ</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ϵ</span>
+<span class="w">        </span><span class="n">Δ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nrsδ</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">f′</span><span class="p">)</span>
 <span class="w">        </span><span class="n">x_n</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">Δ</span>
 <span class="w">    </span><span class="k">end</span>
 </pre></div>
@@ -474,6 +479,7 @@ Remember, in Julia you can type most special characters by typing their <span cl
 <p>At present, this function is flawed - if a particular value for <span class="math notranslate nohighlight">\(x_0\)</span> doesn’t lead to a converging solution, it will iterate for ever.</p>
 <p>By adding a new variable inside our function, called <code class="docutils literal notranslate"><span class="pre">count</span></code>, try modifying the NRS function we just wrote to also stop if it loops more than 40 times.</p>
 <p>(You can either add a second condition to the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop, or use <code class="docutils literal notranslate"><span class="pre">break</span></code> inside the loop to break out).</p>
+<p>If you are in the REPL, you can add new lines to a multi-line entry in the history by pressing <code class="docutils literal notranslate"><span class="pre">ESC</span></code> before pressing <code class="docutils literal notranslate"><span class="pre">enter</span></code>. (Just pressing <code class="docutils literal notranslate"><span class="pre">enter</span></code> will execute the multi-line entry instead).</p>
 </section>
 </section>
 <section id="b-extending-the-nrs-function-to-store-history">
@@ -482,27 +488,24 @@ Remember, in Julia you can type most special characters by typing their <span cl
 <p>That way, we have a record of the path the function has taken to converge to the root it finds.</p>
 <p>We’ll define a new method for the NRS function that does this - multiple dispatch will select the right version for us based on the type of the first argument.</p>
 <p>We’ll need to make only a few changes relative to the first method for NRS:</p>
-<p><strong>Firstly</strong> - this method’s first argument is a Vector of values of type T, where T must be some kind of Number.</p>
-<p>We can express this using the “where” clause in our function definition like so</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">NRS</span><span class="p">(</span><span class="n">xs</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">},</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="o">&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Number</span>
-</pre></div>
-</div>
+<p><strong>Firstly</strong> - this method’s first argument is a Vector of values of type T, where T must be some kind of Number. We can express this using the “where” clause in our function definition.</p>
 <p><strong>Secondly</strong>, rather than <code class="docutils literal notranslate"><span class="pre">x_n</span></code> being assigned to from <code class="docutils literal notranslate"><span class="pre">xs</span></code> directly, it needs to take the first element of <code class="docutils literal notranslate"><span class="pre">xs</span></code>.</p>
-<p>Remembering that Julia arrays index from 1, we can either use <code class="docutils literal notranslate"><span class="pre">xs[1]</span></code> or <code class="docutils literal notranslate"><span class="pre">xs[begin]</span></code> to get that value.</p>
-<p><strong>Thirdly</strong>, we need to add each new value of <code class="docutils literal notranslate"><span class="pre">x_n</span></code> to the <code class="docutils literal notranslate"><span class="pre">xs</span></code> vector.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">push!</span></code> method takes a Vector as its first argument, and a value as its second, and modifies the Vector in-place to append the value.</p>
-<p>We can add a suitable call to <code class="docutils literal notranslate"><span class="pre">push!</span></code> inside the loop, immediately after <code class="docutils literal notranslate"><span class="pre">x_n</span></code> is updated.</p>
+<p><strong>Thirdly</strong>, we need to add each new value of <code class="docutils literal notranslate"><span class="pre">x_n</span></code> to the <code class="docutils literal notranslate"><span class="pre">xs</span></code> vector. Using help mode (<code class="docutils literal notranslate"><span class="pre">?</span></code>) investigate the <code class="docutils literal notranslate"><span class="pre">push!</span></code> method, which can be used to implement this.</p>
 <p><strong>Finally</strong>, we need to return <code class="docutils literal notranslate"><span class="pre">xs</span></code> and not <code class="docutils literal notranslate"><span class="pre">x_n</span></code> at the end of the function.</p>
 <section id="testing-it-out">
 <h3>Testing it out<a class="headerlink" href="#testing-it-out" title="Permalink to this heading">#</a></h3>
-<p>Make a version of NRS with the above changes.</p>
+<ul class="simple">
+<li><p>Make a version of NRS with the above changes.</p></li>
+</ul>
 <p>Test it out: try passing the value <code class="docutils literal notranslate"><span class="pre">5.0</span></code> to NRS, and check it still just returns a single value. Then try passing <code class="docutils literal notranslate"><span class="pre">[5.0]</span></code> and see what you get as a result!</p>
 </section>
 <section id="an-aside">
 <h3>An Aside<a class="headerlink" href="#an-aside" title="Permalink to this heading">#</a></h3>
 <p><em>Technically</em>, this method will actually modify the Vector we pass to it, as Julia implements <em>pass by sharing</em>.</p>
-<p>The convention in Julia is that functions that modify their arguments - or other state - should have a <code class="docutils literal notranslate"><span class="pre">!</span></code> at the end of their name. So, this should really be a new function called <code class="docutils literal notranslate"><span class="pre">NRS!</span></code>.</p>
-<p>However, the pedagogic value of showing how multiple dispatch works outweighs Julia’s conventions in this one case…</p>
+<p>The convention in Julia is that functions that modify their arguments - or other state - should have a <code class="docutils literal notranslate"><span class="pre">!</span></code> at the end of their name. So, this should really be a new function called <code class="docutils literal notranslate"><span class="pre">nrs!</span></code>.</p>
+<ul class="simple">
+<li><p>Make a version of <code class="docutils literal notranslate"><span class="pre">nrs</span></code> which does not modify its Vector argument - making a deep copy of it instead, and returning that.</p></li>
+</ul>
 </section>
 </section>
 <section id="c-plotting">
@@ -550,17 +553,13 @@ Remember, in Julia you can type most special characters by typing their <span cl
 <h4>Scatter plots<a class="headerlink" href="#scatter-plots" title="Permalink to this heading">#</a></h4>
 <p>Now lets modify our figure to add in a trace of all the points we evaluate with our NRS function.</p>
 <p>Using the Vector version, we should call NRS with some initial value in the range 0 to 2.5 - <code class="docutils literal notranslate"><span class="pre">1.2</span></code>, say - and assign the result to a variable.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">history</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NRS</span><span class="p">([</span><span class="mf">1.2</span><span class="p">],</span><span class="w"> </span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">dF</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">history</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nrs</span><span class="p">([</span><span class="mf">1.2</span><span class="p">],</span><span class="w"> </span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">dF</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Now we have a bunch of x values, but we also need the values of F(x) for each of them.</p>
-<p>It’s easy to get this by just broadcasting <code class="docutils literal notranslate"><span class="pre">F</span></code> over all our history values, remembering that broadcasted versions of any operation have a leading <code class="docutils literal notranslate"><span class="pre">.</span></code> .</p>
-<p>Since we’re plotting discrete points, we need the <code class="docutils literal notranslate"><span class="pre">scatter</span></code> function… but since we’re <em>modifying</em> an existing figure, we need the modifying version, <code class="docutils literal notranslate"><span class="pre">scatter!</span></code>.</p>
-<p>So, simply:</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">scatter!</span><span class="p">(</span><span class="n">history</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="o">.</span><span class="p">(</span><span class="n">history</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>should result in a set of points being added to our existing plot, representing the various estimates we iterated through.</p>
+<p>Now we have a bunch of x values, but we also need the values of F(x) for each of them. We can either broadcast over the history vector, or simply pass our plotting method the function to use to generate the y values directly.</p>
+<ul class="simple">
+<li><p>using one of the mutating plot methods, add a scatter plot to the figure showing the points on the curve that we evaluate.</p></li>
+</ul>
 </section>
 </section>
 <section id="going-further-the-complex-plane">
@@ -569,23 +568,37 @@ Remember, in Julia you can type most special characters by typing their <span cl
 <p>In order to display a reasonable representation of a 4 dimensional space (the 2 components of our complex-valued function at each point in the complex plane), we’ll stick to simply plotting the absolute value of F at any point.</p>
 <p><code class="docutils literal notranslate"><span class="pre">contour</span></code> is a good function for this representation - it generally wants 3 values for x,y,z.</p>
 <p>x and y can just be ranges as before (lets go from -3 to 3 in both directions to get a good view).</p>
-<p>z will need to be a function that maps (x,y) back to complex values, calls F and then calls abs on that. We’ll write this as an anonymous function.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">xy_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="o">:</span><span class="mf">0.01</span><span class="o">:</span><span class="mf">3.0</span>
-<span class="w">    </span><span class="n">contour</span><span class="p">(</span><span class="n">xy_r</span><span class="p">,</span><span class="w"> </span><span class="n">xy_r</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="nb">im</span><span class="p">)))</span>
-</pre></div>
-</div>
+<p>z will need to be a function that maps (x,y) back to complex values, calls F and then calls abs on that. We should write this as an anonymous function.</p>
+<ul class="simple">
+<li><p>make the appropriate contour plot of F</p></li>
+</ul>
 <p>If we want to display the trace of an NRS in the complex plane, we can just forgo representing the value of F(x) and just use <code class="docutils literal notranslate"><span class="pre">scatter!</span></code> again - using <code class="docutils literal notranslate"><span class="pre">real()</span></code> and <code class="docutils literal notranslate"><span class="pre">imag()</span></code> as broadcasted functions to get the x and y components of our points.</p>
 <p>So:</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">history</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NRS</span><span class="p">([</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="nb">im</span><span class="p">],</span><span class="w"> </span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">dF</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">history</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nrs</span><span class="p">([</span><span class="mf">1.0</span><span class="o">+</span><span class="mf">1.0</span><span class="nb">im</span><span class="p">],</span><span class="w"> </span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">dF</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>to get our history… and then it’s left to you to write a call to <code class="docutils literal notranslate"><span class="pre">scatter!</span></code> with the information provided to overlay our <code class="docutils literal notranslate"><span class="pre">contour</span></code> plot.</p>
+<ul class="simple">
+<li><p>overlay an appropriate scatter plot on the contour.</p></li>
+</ul>
+</section>
 </section>
 <section id="further-work">
-<h3>Further work<a class="headerlink" href="#further-work" title="Permalink to this heading">#</a></h3>
+<h2>Further work<a class="headerlink" href="#further-work" title="Permalink to this heading">#</a></h2>
 <p>At present our scatter plot makes it hard to see the ordering of the iteration.</p>
 <p>We could provide an array to the <code class="docutils literal notranslate"><span class="pre">markercolor</span></code> property of our scatter plot, allowing each point to take a different colour.</p>
 <p>We’ve also only really tested this with one F and dF - try passing different candidate functions to NRS and see how different initial values converge!</p>
+<section id="advanced-extension">
+<h3>Advanced extension<a class="headerlink" href="#advanced-extension" title="Permalink to this heading">#</a></h3>
+<p>These functions currently all require the user to provide both <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">f′</span></code>, which means that they are prone to user error.</p>
+<p>There are many automatic differentiation packages available for Julia - such as <code class="docutils literal notranslate"><span class="pre">Zygote</span></code> - listed at <a class="reference external" href="https://juliadiff.org">Julia Diff</a>, which we could use to find <code class="docutils literal notranslate"><span class="pre">f′</span></code> directly and efficiently.</p>
+<p>Install <code class="docutils literal notranslate"><span class="pre">Zygote</span></code>.</p>
+<p>Using its <code class="docutils literal notranslate"><span class="pre">gradient</span></code> method, and the fact that (for a holomorphic function), the complex gradient at <span class="math notranslate nohighlight">\(z\)</span> is</p>
+<p><span class="math notranslate nohighlight">\({(\frac{d\Re(f)}{dz}\bigr\rvert_z) }^*\)</span>
+where <code class="docutils literal notranslate"><span class="pre">conj</span></code> is the complex conjugation operator in Julia</p>
+<ul class="simple">
+<li><p>make versions of <code class="docutils literal notranslate"><span class="pre">nrsδ</span></code> and <code class="docutils literal notranslate"><span class="pre">nrs</span></code> that take only the initial value and the function to find the root of (assuming it is holomorphic).</p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -672,7 +685,10 @@ Remember, in Julia you can type most special characters by typing their <span cl
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-the-complex-plane">Going further: the complex plane</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-work">Further work</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-work">Further work</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-extension">Advanced extension</a></li>
 </ul>
 </li>
 </ul>
