@@ -405,7 +405,9 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-the-complex-plane">Going further: the complex plane</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-work">Further work</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-work">Further work</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-extension">Advanced extension</a></li>
 </ul>
 </li>
@@ -566,7 +568,7 @@ Note that we’re following julia convention here and naming our function lowerc
 <p>In order to display a reasonable representation of a 4 dimensional space (the 2 components of our complex-valued function at each point in the complex plane), we’ll stick to simply plotting the absolute value of F at any point.</p>
 <p><code class="docutils literal notranslate"><span class="pre">contour</span></code> is a good function for this representation - it generally wants 3 values for x,y,z.</p>
 <p>x and y can just be ranges as before (lets go from -3 to 3 in both directions to get a good view).</p>
-<p>z will need to be a function that maps (x,y) back to complex values, calls F and then calls abs on that. We’ll write this as an anonymous function, although you could also</p>
+<p>z will need to be a function that maps (x,y) back to complex values, calls F and then calls abs on that. We should write this as an anonymous function.</p>
 <ul class="simple">
 <li><p>make the appropriate contour plot of F</p></li>
 </ul>
@@ -580,12 +582,12 @@ Note that we’re following julia convention here and naming our function lowerc
 <li><p>overlay an appropriate scatter plot on the contour.</p></li>
 </ul>
 </section>
+</section>
 <section id="further-work">
-<h3>Further work<a class="headerlink" href="#further-work" title="Permalink to this heading">#</a></h3>
+<h2>Further work<a class="headerlink" href="#further-work" title="Permalink to this heading">#</a></h2>
 <p>At present our scatter plot makes it hard to see the ordering of the iteration.</p>
 <p>We could provide an array to the <code class="docutils literal notranslate"><span class="pre">markercolor</span></code> property of our scatter plot, allowing each point to take a different colour.</p>
 <p>We’ve also only really tested this with one F and dF - try passing different candidate functions to NRS and see how different initial values converge!</p>
-</section>
 <section id="advanced-extension">
 <h3>Advanced extension<a class="headerlink" href="#advanced-extension" title="Permalink to this heading">#</a></h3>
 <p>These functions currently all require the user to provide both <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">f'</span></code>, which means that they are prone to user error.</p>
@@ -681,7 +683,9 @@ where <code class="docutils literal notranslate"><span class="pre">conj</span></
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-the-complex-plane">Going further: the complex plane</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-work">Further work</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-work">Further work</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-extension">Advanced extension</a></li>
 </ul>
 </li>
