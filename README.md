@@ -10,5 +10,7 @@ Follow the tutorial with Binder:
 
 - - -
 When not taken from other sources (with its own Copyright and License), this material is:
-Copyright © 2023 CERN and the authors / contributors
-Licensed under CC-BY-4.0
+
+Copyright © 2023 CERN and the authors / contributors.
+
+Licensed under [CC-BY-4.0](./LICENSE).
