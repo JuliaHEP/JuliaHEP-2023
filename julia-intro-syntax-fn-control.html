@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Julia Syntax Survival (Functions and Control Flow) &#8212; Introduction to Julia</title>
+    <title>Functions and Control Flow &#8212; Introduction to Julia</title>
   
   
   
@@ -174,9 +174,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-intro.html">Julia for Python (and C++) programmers</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-installation.html">Installing and Running Julia</a></li>
-<li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-operators-variables.html">Julia Syntax Survival (Operators and Variables)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-operators-variables.html">Operators and Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-arrays.html">Arrays</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Julia Syntax Survival (Functions and Control Flow)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Functions and Control Flow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-anonymous-and-do-block.html">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-broadcasting.html">Broadcasting</a></li>
@@ -376,7 +376,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Julia Syntax Survival (Functions and Control Flow)</h1>
+    <h1>Functions and Control Flow</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -414,8 +414,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="julia-syntax-survival-functions-and-control-flow">
-<h1>Julia Syntax Survival (Functions and Control Flow)<a class="headerlink" href="#julia-syntax-survival-functions-and-control-flow" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="functions-and-control-flow">
+<h1>Functions and Control Flow<a class="headerlink" href="#functions-and-control-flow" title="Permalink to this heading">#</a></h1>
 <p>Here are the key constructs for defining functions and using control flow in Julia:</p>
 <section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h2>
@@ -470,7 +470,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Notice our function is working for any types (we used <code class="docutils literal notranslate"><span class="pre">Int64</span></code>, <code class="docutils literal notranslate"><span class="pre">Complex</span></code> and <code class="docutils literal notranslate"><span class="pre">String</span></code>) - in Julia this stays <em>fast</em> because of <em>multiple dispatch</em> that we discuss later.</p>
+<p>Notice our function is working for any types (we used <code class="docutils literal notranslate"><span class="pre">Int64</span></code>, <code class="docutils literal notranslate"><span class="pre">Complex</span></code> and <code class="docutils literal notranslate"><span class="pre">String</span></code>) - this stays <em>fast</em> in Julia because of <em>multiple dispatch</em> that we discuss later.</p>
 <section id="function-documentation">
 <h3>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this heading">#</a></h3>
 <p>A string directly before a function definition is interpreted by Julia as “documentation” for the function.
@@ -742,7 +742,7 @@ Word 5 is am
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">hip</span><span class="p">,</span><span class="w"> </span><span class="n">hop</span><span class="p">,</span><span class="w"> </span><span class="n">hup</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">zip</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="o">:</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;yes&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;no&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;maybe&quot;</span><span class="p">])</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">hip</span><span class="p">,</span><span class="w"> </span><span class="n">hop</span><span class="p">,</span><span class="w"> </span><span class="n">hup</span><span class="p">)</span><span class="w"> </span><span class="o">∈</span><span class="w"> </span><span class="n">zip</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="o">:</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;yes&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;no&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;maybe&quot;</span><span class="p">])</span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;The </span><span class="si">$hip</span><span class="s"> and </span><span class="si">$hop</span><span class="s"> say </span><span class="si">$hup</span><span class="s">&quot;</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
@@ -756,6 +756,7 @@ The 3 and 12 say maybe
 </div>
 </div>
 </div>
+<p>Note that Julia is happy with <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">z</span> <span class="pre">in</span> <span class="pre">...</span></code> and <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">z</span> <span class="pre">∈</span> <span class="pre">...</span></code> (type <code class="docutils literal notranslate"><span class="pre">\in</span></code> to get a <code class="docutils literal notranslate"><span class="pre">∈</span></code>; note that <code class="docutils literal notranslate"><span class="pre">=</span></code> can be used, so you might see this, but it is frowned upon!)</p>
 <p>A more novel feature: <code class="docutils literal notranslate"><span class="pre">for</span></code> will also naturally form the outer product of a comma-separated set of iterators provided to them, without the need for “nesting” of loops. (This also applies to the <code class="docutils literal notranslate"><span class="pre">for</span></code> in comprehensions, so you can easily make multi-dimensional arrays with a chain of iterators if you want all the combinations that result as elements.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

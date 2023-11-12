@@ -174,9 +174,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-intro.html">Julia for Python (and C++) programmers</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-installation.html">Installing and Running Julia</a></li>
-<li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-operators-variables.html">Julia Syntax Survival (Operators and Variables)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-operators-variables.html">Operators and Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-arrays.html">Arrays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-fn-control.html">Julia Syntax Survival (Functions and Control Flow)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-fn-control.html">Functions and Control Flow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-anonymous-and-do-block.html">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Broadcasting</a></li>
@@ -520,14 +520,15 @@ For example, making use of the Julia “ImageShow” package family to naturally
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">[ Info: </span>Precompiling ImageCore [a09fc81d-aa75-5fe9-8630-4744c3626534]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2508] signal (2): Interrupt
-in expression starting at /home/runner/.julia/packages/ImageCore/wTsMr/src/ImageCore.jl:173
-_ZN4llvm30TargetTransformInfoWrapperPassD0Ev at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2604] signal (2): Interrupt
+in expression starting at none:0
+_ZNK4llvm4Type22getPrimitiveSizeInBitsEv at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+unknown function (ip: 0x7f000000003f)
 unknown function (ip: (nil))
-Allocations: 43603762 (Pool: 43570153; Big: 33609); GC: 59
+Allocations: 47085538 (Pool: 47048205; Big: 37333); GC: 70
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Failed</span> <span class="n">to</span> <span class="n">precompile</span> <span class="n">ImageCore</span> <span class="p">[</span><span class="n">a09fc81d</span><span class="o">-</span><span class="n">aa75</span><span class="o">-</span><span class="mi">5</span><span class="n">fe9</span><span class="o">-</span><span class="mi">8630</span><span class="o">-</span><span class="mi">4744</span><span class="n">c3626534</span><span class="p">]</span> <span class="n">to</span> <span class="s2">&quot;/home/runner/.julia/compiled/v1.9/ImageCore/jl_XuHFvz&quot;</span><span class="o">.</span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Failed</span> <span class="n">to</span> <span class="n">precompile</span> <span class="n">ImageCore</span> <span class="p">[</span><span class="n">a09fc81d</span><span class="o">-</span><span class="n">aa75</span><span class="o">-</span><span class="mi">5</span><span class="n">fe9</span><span class="o">-</span><span class="mi">8630</span><span class="o">-</span><span class="mi">4744</span><span class="n">c3626534</span><span class="p">]</span> <span class="n">to</span> <span class="s2">&quot;/home/runner/.julia/compiled/v1.9/ImageCore/jl_TJDZoH&quot;</span><span class="o">.</span>
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">error</span><span class="p">(</span><span class="n">s</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>

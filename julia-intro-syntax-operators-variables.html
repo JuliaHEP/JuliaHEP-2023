@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Julia Syntax Survival (Operators and Variables) &#8212; Introduction to Julia</title>
+    <title>Operators and Variables &#8212; Introduction to Julia</title>
   
   
   
@@ -172,9 +172,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-intro.html">Julia for Python (and C++) programmers</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-installation.html">Installing and Running Julia</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Julia Syntax Survival (Operators and Variables)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Operators and Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-arrays.html">Arrays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-fn-control.html">Julia Syntax Survival (Functions and Control Flow)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="julia-intro-syntax-fn-control.html">Functions and Control Flow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-anonymous-and-do-block.html">Anonymous Functions and Do-block</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-multiple-dispatch.html">Multiple Dispatch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="julia-intro-broadcasting.html">Broadcasting</a></li>
@@ -374,7 +374,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Julia Syntax Survival (Operators and Variables)</h1>
+    <h1>Operators and Variables</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -412,8 +412,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="julia-syntax-survival-operators-and-variables">
-<h1>Julia Syntax Survival (Operators and Variables)<a class="headerlink" href="#julia-syntax-survival-operators-and-variables" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="operators-and-variables">
+<h1>Operators and Variables<a class="headerlink" href="#operators-and-variables" title="Permalink to this heading">#</a></h1>
 <p>All languages have their syntax and here we present a whistle-stop tour of the highlights of Julia.</p>
 <p>We don’t attempt to be exhaustive here - check the <a class="reference external" href="https://docs.julialang.org/">Julia Documentation</a> (or do a search) if there’s anything you are unsure of, and for more functionality we haven’t covered here on advanced topics.</p>
 <section id="variables">
@@ -472,7 +472,7 @@ the statement:</p>
 </tr>
 </tbody>
 </table>
-<p>We put in bold the operators that might be different from other languages you know. In particular, note that Julia uses <code class="docutils literal notranslate"><span class="pre">^</span></code> for exponentation, not logical operations (and not **, like many other languages).</p>
+<p>In particular, note that Julia uses <code class="docutils literal notranslate"><span class="pre">^</span></code> for exponentiation, not logical operations (and not **, as some other languages).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">33</span><span class="o">%</span><span class="mi">10</span><span class="p">)</span>
@@ -509,37 +509,25 @@ are supported on all primitive integer types:</p>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">⊻</span> <span class="pre">y</span></code></p></td>
 <td class="text-left"><p>bitwise xor (exclusive or)</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>…</p></td>
-<td class="text-left"><p>….</p></td>
-</tr>
 </tbody>
 </table>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span>
 <span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span>
-<span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a &amp; b = 5
+a | b = 15
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">b</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15
-</pre></div>
-</div>
-</div>
-</div>
+<p>Here we’re also using the <code class="docutils literal notranslate"><span class="pre">&#64;show</span></code> macro, which explicitly prints the result of an expression.</p>
 <p>Teaser: We’ll look at a very cool feature of <em>vectorised</em> or <em>broadcast</em> operators shortly.</p>
 <section id="updating-and-testing">
 <h3>Updating and Testing<a class="headerlink" href="#updating-and-testing" title="Permalink to this heading">#</a></h3>
@@ -594,7 +582,7 @@ are supported on all primitive integer types:</p>
 </div>
 </div>
 </div>
-<p>Julia also has a <code class="docutils literal notranslate"><span class="pre">===</span></code> comparison operator that is <code class="docutils literal notranslate"><span class="pre">true</span></code> when two objects are the same (not just the same value(s), but really the same in-memory object)</p>
+<p>Julia also has a <code class="docutils literal notranslate"><span class="pre">===</span></code> comparison operator that is <code class="docutils literal notranslate"><span class="pre">true</span></code> when two objects are the same (not just the same value(s), but really the same object)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
@@ -703,13 +691,13 @@ a === c = true
  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">Int16</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">UInt64</span><span class="p">)</span>
    <span class="o">@</span> <span class="n">Core</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">782</span>
  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>As in Python, you don’t need to specify a type for a variable (unlike C++) - by default, they work like Python, and can freely be assigned any values of any type.</p>
-<p>However, you <em>can</em> specify a type for a variable, using the <code class="docutils literal notranslate"><span class="pre">::Type</span></code> notation, which causes that variable to <em>only</em> hold values of that type (here we’re also using the <code class="docutils literal notranslate"><span class="pre">&#64;show</span></code> macro, which explicitly prints the result of an expression):</p>
+<p>However, you <em>can</em> specify a type for a variable, using the <code class="docutils literal notranslate"><span class="pre">::Type</span></code> notation, which causes that variable to <em>only</em> hold values of that type:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">integer_value</span><span class="o">::</span><span class="kt">Int64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
@@ -748,7 +736,7 @@ If we try to put a non-integer into this variable:</p>
  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">convert</span><span class="p">(</span><span class="c1">#unused#::Type{Int64}, x::Float64)</span>
    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">number</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">7</span>
  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -896,7 +884,7 @@ farmyard_sounds[&quot;🐱&quot;] = &quot;Meow&quot; = &quot;Meow&quot;
 </section>
 <section id="custom-composite-types">
 <h3>Custom Composite Types<a class="headerlink" href="#custom-composite-types" title="Permalink to this heading">#</a></h3>
-<p>You can also create composite types, <code class="docutils literal notranslate"><span class="pre">struct</span></code>s - here you need to specify the types of their sub-fields. As with many Julia constructs, a struct definition starts with a keyword (<code class="docutils literal notranslate"><span class="pre">struct</span></code>) and ends with <code class="docutils literal notranslate"><span class="pre">end</span></code>:</p>
+<p>You can also create composite types, <code class="docutils literal notranslate"><span class="pre">struct</span></code>s - here you need to specify the types of their sub-fields. As with many Julia constructs, a struct definition starts with a keyword, <code class="docutils literal notranslate"><span class="pre">struct</span></code>, and ends with <code class="docutils literal notranslate"><span class="pre">end</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">my_vector</span>
