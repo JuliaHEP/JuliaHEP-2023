@@ -452,6 +452,52 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">[ Info: </span>Precompiling DataFrames [a93c6f00-e57d-5684-b7b6-d8193f3e46c0]
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2731] signal (2): Interrupt
+in expression starting at none:0
+.plt at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+_ZN4llvm23ReplaceableMetadataImpl11getOrCreateERNS_8MetadataE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+_ZN4llvm16MetadataTracking5trackEPvRNS_8MetadataENS_12PointerUnionIJPNS_15MetadataAsValueEPS2_EEE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+_ZN4llvm6MDNodeC1ERNS_11LLVMContextEjNS_8Metadata11StorageTypeENS_8ArrayRefIPS3_EES7_ at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+_ZN4llvm12DISubprogram7getImplERNS_11LLVMContextEPNS_8MetadataEPNS_8MDStringES6_S4_jS4_jS4_jiNS_6DINode7DIFlagsENS0_9DISPFlagsES4_S4_S4_S4_S4_S4_NS3_11StorageTypeEb at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+_ZN4llvm9DIBuilder14createFunctionEPNS_7DIScopeENS_9StringRefES3_PNS_6DIFileEjPNS_16DISubroutineTypeEjNS_6DINode7DIFlagsENS_12DISubprogram9DISPFlagsENS_24MDTupleTypedArrayWrapperINS_19DITemplateParameterEEEPSA_NSC_INS_6DITypeEEENSC_IS8_EE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+emit_function at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/codegen.cpp:7744
+jl_emit_code at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/codegen.cpp:8478
+jl_create_native_impl at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/aotcompile.cpp:344
+jl_precompile_ at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/precompile_utils.c:258
+jl_precompile_worklist at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/precompile_utils.c:308 [inlined]
+ijl_create_system_image at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/staticdata.c:2642
+ijl_write_compiler_output at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/precompile.c:117
+ijl_atexit_hook at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/init.c:258
+jl_repl_entrypoint at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/jlapi.c:718
+main at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/cli/loader_exe.c:59
+unknown function (ip: 0x7fd5aea29d8f)
+__libc_start_main at /lib/x86_64-linux-gnu/libc.so.6 (unknown line)
+unknown function (ip: 0x4010b8)
+unknown function (ip: (nil))
+Allocations: 50958921 (Pool: 50921991; Big: 36930); GC: 73
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Failed</span> <span class="n">to</span> <span class="n">precompile</span> <span class="n">DataFrames</span> <span class="p">[</span><span class="n">a93c6f00</span><span class="o">-</span><span class="n">e57d</span><span class="o">-</span><span class="mi">5684</span><span class="o">-</span><span class="n">b7b6</span><span class="o">-</span><span class="n">d8193f3e46c0</span><span class="p">]</span> <span class="n">to</span> <span class="s2">&quot;/home/runner/.julia/compiled/v1.9/DataFrames/jl_EhhtTm&quot;</span><span class="o">.</span>
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">error</span><span class="p">(</span><span class="n">s</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">35</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">internal_stderr</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">internal_stdout</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">keep_loaded_modules</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2300</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">compilecache</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2167</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">_require</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">env</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1805</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">_require_prelocked</span><span class="p">(</span><span class="n">uuidkey</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">env</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1660</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1648</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">lock</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">267</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1611</span>
+</pre></div>
+</div>
 </div>
 </div>
 </section>
