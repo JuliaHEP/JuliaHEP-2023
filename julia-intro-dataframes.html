@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>DataFrames in Julia &#8212; Introduction to Julia</title>
   
@@ -15,57 +14,53 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'julia-intro-dataframes';</script>
+    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installing and Running Julia" href="exercises/install.html" />
@@ -79,28 +74,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -122,12 +112,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -142,9 +140,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="intro.html">
+  
   
   
   
@@ -154,12 +156,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/juliaheplogo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/juliaheplogo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/juliaheplogo.png" class="logo__image only-light" alt="Introduction to Julia - Home"/>
+    <script>document.write(`<img src="_static/juliaheplogo.png" class="logo__image only-dark" alt="Introduction to Julia - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -208,7 +221,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -217,14 +230,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -346,26 +359,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -416,14 +431,14 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="dataframes-in-julia">
-<h1>DataFrames in Julia<a class="headerlink" href="#dataframes-in-julia" title="Permalink to this heading">#</a></h1>
+<h1>DataFrames in Julia<a class="headerlink" href="#dataframes-in-julia" title="Link to this heading">#</a></h1>
 <p>Let’s continue our exploration of Julia by looking at one of the most popular packages in the ecosystem, <a class="reference external" href="https://dataframes.juliadata.org/stable/"><strong>DataFrames</strong></a>.</p>
 <p>DataFrames are a powerful and convenient way to work with <em>tabular data</em>. They are very popular in the R and Python ecosystems and Julia can speak DataFrames too.</p>
 <section id="dataframes-package">
-<h2>DataFrames Package<a class="headerlink" href="#dataframes-package" title="Permalink to this heading">#</a></h2>
+<h2>DataFrames Package<a class="headerlink" href="#dataframes-package" title="Link to this heading">#</a></h2>
 <p>By now installing a new package in Julia should be something you know how to do, but for reference:</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">➜</span><span class="w">  </span><span class="n">JuliaHEP</span><span class="o">-</span><span class="mi">2023</span><span class="w"> </span><span class="n">git</span><span class="o">:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="n">julia</span><span class="w"> </span><span class="o">--</span><span class="n">project</span><span class="o">=.</span>
 <span class="w">               </span><span class="n">_</span>
@@ -452,38 +467,36 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">[ Info: </span>Precompiling DataFrames [a93c6f00-e57d-5684-b7b6-d8193f3e46c0]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2731] signal (2): Interrupt
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3756] signal (2): Interrupt
 in expression starting at none:0
-.plt at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm23ReplaceableMetadataImpl11getOrCreateERNS_8MetadataE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm16MetadataTracking5trackEPvRNS_8MetadataENS_12PointerUnionIJPNS_15MetadataAsValueEPS2_EEE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm6MDNodeC1ERNS_11LLVMContextEjNS_8Metadata11StorageTypeENS_8ArrayRefIPS3_EES7_ at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm12DISubprogram7getImplERNS_11LLVMContextEPNS_8MetadataEPNS_8MDStringES6_S4_jS4_jS4_jiNS_6DINode7DIFlagsENS0_9DISPFlagsES4_S4_S4_S4_S4_S4_NS3_11StorageTypeEb at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-_ZN4llvm9DIBuilder14createFunctionEPNS_7DIScopeENS_9StringRefES3_PNS_6DIFileEjPNS_16DISubroutineTypeEjNS_6DINode7DIFlagsENS_12DISubprogram9DISPFlagsENS_24MDTupleTypedArrayWrapperINS_19DITemplateParameterEEEPSA_NSC_INS_6DITypeEEENSC_IS8_EE at /opt/hostedtoolcache/julia/1.9.3/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
-emit_function at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/codegen.cpp:7744
-jl_emit_code at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/codegen.cpp:8478
-jl_create_native_impl at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/aotcompile.cpp:344
-jl_precompile_ at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/precompile_utils.c:258
-jl_precompile_worklist at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/precompile_utils.c:308 [inlined]
-ijl_create_system_image at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/staticdata.c:2642
-ijl_write_compiler_output at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/precompile.c:117
-ijl_atexit_hook at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/init.c:258
-jl_repl_entrypoint at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/src/jlapi.c:718
-main at /cache/build/default-amdci5-5/julialang/julia-release-1-dot-9/cli/loader_exe.c:59
-unknown function (ip: 0x7fd5aea29d8f)
+_ZN4llvm8DenseMapIPNS_10BasicBlockENS_14DomTreeBuilder11SemiNCAInfoINS_17DominatorTreeBaseIS1_Lb0EEEE7InfoRecENS_12DenseMapInfoIS2_vEENS_6detail12DenseMapPairIS2_S8_EEE4growEj at /opt/hostedtoolcache/julia/1.9.4/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+_ZN4llvm12DenseMapBaseINS_8DenseMapIPNS_10BasicBlockENS_14DomTreeBuilder11SemiNCAInfoINS_17DominatorTreeBaseIS2_Lb0EEEE7InfoRecENS_12DenseMapInfoIS3_vEENS_6detail12DenseMapPairIS3_S9_EEEES3_S9_SB_SE_E16FindAndConstructERKS3_ at /opt/hostedtoolcache/julia/1.9.4/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+_ZN4llvm14DomTreeBuilder11SemiNCAInfoINS_17DominatorTreeBaseINS_10BasicBlockELb0EEEE6runDFSILb0EPFbPS3_S7_EEEjS7_jT0_jPKNS_8DenseMapIS7_jNS_12DenseMapInfoIS7_vEENS_6detail12DenseMapPairIS7_jEEEE.constprop.460 at /opt/hostedtoolcache/julia/1.9.4/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+_ZN4llvm14DomTreeBuilder11SemiNCAInfoINS_17DominatorTreeBaseINS_10BasicBlockELb0EEEE20CalculateFromScratchERS4_PNS5_15BatchUpdateInfoE at /opt/hostedtoolcache/julia/1.9.4/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+_ZN4llvm24DominatorTreeWrapperPass13runOnFunctionERNS_8FunctionE at /opt/hostedtoolcache/julia/1.9.4/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+_ZN4llvm13FPPassManager13runOnFunctionERNS_8FunctionE at /opt/hostedtoolcache/julia/1.9.4/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+_ZN4llvm13FPPassManager11runOnModuleERNS_6ModuleE at /opt/hostedtoolcache/julia/1.9.4/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+_ZN4llvm6legacy15PassManagerImpl3runERNS_6ModuleE at /opt/hostedtoolcache/julia/1.9.4/x64/bin/../lib/julia/libLLVM-14jl.so (unknown line)
+operator() at /cache/build/builder-amdci4-4/julialang/julia-release-1-dot-9/src/aotcompile.cpp:633
+jl_dump_native_impl at /cache/build/builder-amdci4-4/julialang/julia-release-1-dot-9/src/aotcompile.cpp:692
+ijl_write_compiler_output at /cache/build/builder-amdci4-4/julialang/julia-release-1-dot-9/src/precompile.c:127
+ijl_atexit_hook at /cache/build/builder-amdci4-4/julialang/julia-release-1-dot-9/src/init.c:258
+jl_repl_entrypoint at /cache/build/builder-amdci4-4/julialang/julia-release-1-dot-9/src/jlapi.c:718
+main at /cache/build/builder-amdci4-4/julialang/julia-release-1-dot-9/cli/loader_exe.c:59
+unknown function (ip: 0x7ffa98029d8f)
 __libc_start_main at /lib/x86_64-linux-gnu/libc.so.6 (unknown line)
 unknown function (ip: 0x4010b8)
 unknown function (ip: (nil))
-Allocations: 50958921 (Pool: 50921991; Big: 36930); GC: 73
+Allocations: 51220239 (Pool: 51182714; Big: 37525); GC: 72
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Failed</span> <span class="n">to</span> <span class="n">precompile</span> <span class="n">DataFrames</span> <span class="p">[</span><span class="n">a93c6f00</span><span class="o">-</span><span class="n">e57d</span><span class="o">-</span><span class="mi">5684</span><span class="o">-</span><span class="n">b7b6</span><span class="o">-</span><span class="n">d8193f3e46c0</span><span class="p">]</span> <span class="n">to</span> <span class="s2">&quot;/home/runner/.julia/compiled/v1.9/DataFrames/jl_EhhtTm&quot;</span><span class="o">.</span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Failed</span> <span class="n">to</span> <span class="n">precompile</span> <span class="n">DataFrames</span> <span class="p">[</span><span class="n">a93c6f00</span><span class="o">-</span><span class="n">e57d</span><span class="o">-</span><span class="mi">5684</span><span class="o">-</span><span class="n">b7b6</span><span class="o">-</span><span class="n">d8193f3e46c0</span><span class="p">]</span> <span class="n">to</span> <span class="s2">&quot;/home/runner/.julia/compiled/v1.9/DataFrames/jl_vsldC0&quot;</span><span class="o">.</span>
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">error</span><span class="p">(</span><span class="n">s</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">35</span>
  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">internal_stderr</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">internal_stdout</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">keep_loaded_modules</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2300</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2294</span>
  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">compilecache</span>
    <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2167</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">_require</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">env</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
@@ -502,7 +515,7 @@ Allocations: 50958921 (Pool: 50921991; Big: 36930); GC: 73
 </div>
 </section>
 <section id="creating-dataframes">
-<h2>Creating DataFrames<a class="headerlink" href="#creating-dataframes" title="Permalink to this heading">#</a></h2>
+<h2>Creating DataFrames<a class="headerlink" href="#creating-dataframes" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">leptons</span><span class="p">()</span>
@@ -533,7 +546,7 @@ Allocations: 50958921 (Pool: 50921991; Big: 36930); GC: 73
 <p>As you can see the DataFrame is constructed with a bunch of vectors, of different types (but the same length!), and also using a scalar, when every row has the same value.</p>
 <p>There are different ways to construct DataFrames from dictionaries, named tuples, matrices and so on, as well as using alternative column names - read the docs for all the ways!</p>
 <section id="loading-data-from-csv">
-<h3>Loading Data from CSV<a class="headerlink" href="#loading-data-from-csv" title="Permalink to this heading">#</a></h3>
+<h3>Loading Data from CSV<a class="headerlink" href="#loading-data-from-csv" title="Link to this heading">#</a></h3>
 <p>Loading data from a CSV file is extremely common. You will need to use the <code class="docutils literal notranslate"><span class="pre">CSV</span></code> package.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -551,7 +564,7 @@ Allocations: 50958921 (Pool: 50921991; Big: 36930); GC: 73
 </div>
 </div>
 <p>And we load the table.</p>
-<p>N.B. If you have this tutorial checked out from GitHub, or running in Binder, then the relative path below is correct, viz., in the <code class="docutils literal notranslate"><span class="pre">./assets</span></code> directory; you can also <span class="xref myst">download the data</span> directly.</p>
+<p>N.B. If you have this tutorial checked out from GitHub, or running in Binder, then the relative path below is correct, viz., in the <code class="docutils literal notranslate"><span class="pre">./assets</span></code> directory; you can also <a class="reference internal" href="#julia-intro/docs/assets/atlas-higgs-challenge-2014-v2-reduced.csv"><span class="xref myst">download the data</span></a> directly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">higgs_ml</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CSV</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">joinpath</span><span class="p">(</span><span class="s">&quot;assets&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;atlas-higgs-challenge-2014-v2-reduced.csv&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">)</span>
@@ -607,9 +620,9 @@ Label
 </section>
 </section>
 <section id="basic-operations">
-<h2>Basic Operations<a class="headerlink" href="#basic-operations" title="Permalink to this heading">#</a></h2>
+<h2>Basic Operations<a class="headerlink" href="#basic-operations" title="Link to this heading">#</a></h2>
 <section id="accessing-data">
-<h3>Accessing Data<a class="headerlink" href="#accessing-data" title="Permalink to this heading">#</a></h3>
+<h3>Accessing Data<a class="headerlink" href="#accessing-data" title="Link to this heading">#</a></h3>
 <p>The template for accessing data from a DataFrame is:</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">my_data</span><span class="p">[</span><span class="n">selected_rows</span><span class="p">,</span><span class="w"> </span><span class="n">selected_columns</span><span class="p">]</span>
 </pre></div>
@@ -699,7 +712,7 @@ Label
 </div>
 </section>
 <section id="copying-data">
-<h3>Copying Data<a class="headerlink" href="#copying-data" title="Permalink to this heading">#</a></h3>
+<h3>Copying Data<a class="headerlink" href="#copying-data" title="Link to this heading">#</a></h3>
 <p>If a <code class="docutils literal notranslate"><span class="pre">:</span></code> notation is used for the row selection, then a copy of the data is made:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -777,7 +790,7 @@ Label
 </div>
 </section>
 <section id="selection-from-bool">
-<h3>Selection from <code class="docutils literal notranslate"><span class="pre">bool</span></code><a class="headerlink" href="#selection-from-bool" title="Permalink to this heading">#</a></h3>
+<h3>Selection from <code class="docutils literal notranslate"><span class="pre">bool</span></code><a class="headerlink" href="#selection-from-bool" title="Link to this heading">#</a></h3>
 <p>A powerful way to select data is to select rows on a boolean vector constructed from the data frame itself, e.g., to select all rows that are signal events do the following.</p>
 <p>(Below we explain why you need to use <code class="docutils literal notranslate"><span class="pre">.==</span></code> to broadcast the comparison.)</p>
 <div class="cell docutils container">
@@ -791,7 +804,7 @@ Label
 </div>
 </section>
 <section id="views">
-<h3>Views<a class="headerlink" href="#views" title="Permalink to this heading">#</a></h3>
+<h3>Views<a class="headerlink" href="#views" title="Link to this heading">#</a></h3>
 <p>With <code class="docutils literal notranslate"><span class="pre">view()</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;view</span></code> we create a view into a dataframe, which is fast and efficient</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -805,7 +818,7 @@ Label
 <p>Just to emphasise the point, <em><code class="docutils literal notranslate"><span class="pre">higgs_jets</span></code> is an independent data frame, and <code class="docutils literal notranslate"><span class="pre">leading_jets</span></code> is a data frame view into the primary data</em>.</p>
 </section>
 <section id="broadcast-assignment">
-<h3>Broadcast Assignment<a class="headerlink" href="#broadcast-assignment" title="Permalink to this heading">#</a></h3>
+<h3>Broadcast Assignment<a class="headerlink" href="#broadcast-assignment" title="Link to this heading">#</a></h3>
 <p>To broadcast operations across a data frame, we use Julia’s <code class="docutils literal notranslate"><span class="pre">.=</span></code> operation</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -829,7 +842,7 @@ Label
 </div>
 </section>
 <section id="adding-new-data">
-<h3>Adding New Data<a class="headerlink" href="#adding-new-data" title="Permalink to this heading">#</a></h3>
+<h3>Adding New Data<a class="headerlink" href="#adding-new-data" title="Link to this heading">#</a></h3>
 <p>Adding new data to a data frame is just a matter of assigning to a new column (using the Julia <em>symbol</em> for the name is useful)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -844,7 +857,7 @@ Label
 </section>
 </section>
 <section id="data-manipulation">
-<h2>Data Manipulation<a class="headerlink" href="#data-manipulation" title="Permalink to this heading">#</a></h2>
+<h2>Data Manipulation<a class="headerlink" href="#data-manipulation" title="Link to this heading">#</a></h2>
 <p>So much for selecting and replacing data - how do we do more interesting thing?</p>
 <p>The first thing we might want to do is ensure that we can select events that match some particular criteria - for that we can use the <code class="docutils literal notranslate"><span class="pre">filter</span></code> function, like this:</p>
 <div class="cell docutils container">
@@ -880,7 +893,7 @@ Label
 <p>Notice that the arguments to the <code class="docutils literal notranslate"><span class="pre">filter</span></code> method follow the Julia convention, with the filter parameters given first, followed by the data object.</p>
 <p>Of note is the selector pattern <code class="docutils literal notranslate"><span class="pre">columns</span> <span class="pre">=&gt;</span> <span class="pre">filter_funtion</span></code> - we shall see this repeated!</p>
 <section id="derived-data">
-<h3>Derived Data<a class="headerlink" href="#derived-data" title="Permalink to this heading">#</a></h3>
+<h3>Derived Data<a class="headerlink" href="#derived-data" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Statistics</span>
@@ -922,7 +935,7 @@ Label
 </div>
 </section>
 <section id="derived-data-and-missing-values">
-<h3>Derived Data and <code class="docutils literal notranslate"><span class="pre">missing</span></code> values<a class="headerlink" href="#derived-data-and-missing-values" title="Permalink to this heading">#</a></h3>
+<h3>Derived Data and <code class="docutils literal notranslate"><span class="pre">missing</span></code> values<a class="headerlink" href="#derived-data-and-missing-values" title="Link to this heading">#</a></h3>
 <p>For some analysis, it’s pretty useful to add derived values, which we know how to do:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -980,9 +993,9 @@ missing * 3 = missing
 <p>This is a great example of how Julia’s type system works so powerfully with multiple dispatch!</p>
 </section>
 <section id="transform-select-combine-groupby-filter">
-<h3>Transform, Select, Combine, GroupBy, Filter<a class="headerlink" href="#transform-select-combine-groupby-filter" title="Permalink to this heading">#</a></h3>
+<h3>Transform, Select, Combine, GroupBy, Filter<a class="headerlink" href="#transform-select-combine-groupby-filter" title="Link to this heading">#</a></h3>
 <p>Just as a short summary of the data frame manipulation functions we met:</p>
-<table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p><strong>Function</strong></p></th>
 <th class="head"><p><strong>Description</strong></p></th>
@@ -1006,11 +1019,12 @@ missing * 3 = missing
 </tr>
 </tbody>
 </table>
+</div>
 <p>The use of <code class="docutils literal notranslate"><span class="pre">groupby</span></code> and <code class="docutils literal notranslate"><span class="pre">combine</span></code> allows us to powerfully manipulate data in Julia using the well known <a class="reference external" href="http://www.jstatsoft.org/v40/i01"><em>Split, Combine, Apply</em> strategy</a>, originally introduced for S.</p>
 </section>
 </section>
 <section id="visualising">
-<h2>Visualising<a class="headerlink" href="#visualising" title="Permalink to this heading">#</a></h2>
+<h2>Visualising<a class="headerlink" href="#visualising" title="Link to this heading">#</a></h2>
 <p>There is extremely good integration between the Julia plotting ecosystem and data frames. Here we give a quick tour of some of the plots that we can easily make with this data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4872,8 +4886,8 @@ AABCIiwAAAAAAABASIQFAAAAAAAACImwAAAAAAAAAKEfxEvT8StK7wYAAAAASUVORK5CYII=
               
               
               
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                <footer class="prev-next-footer d-print-none">
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="julia-intro-plots.html"
@@ -4901,6 +4915,7 @@ AABCIiwAAAAAAABASIQFAAAAAAAACImwAAAAAAAAAKEfxEvT8StK7wYAAAAASUVORK5CYII=
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -4950,6 +4965,7 @@ By Graeme A Stewart, Samuel Skipsey
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright CERN, The Contributors 2023.
@@ -4976,8 +4992,8 @@ By Graeme A Stewart, Samuel Skipsey
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
